@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="title">Kalkulator</ui:insert></title>
+	<h:outputStylesheet name="assets/css/main.css" library="template" />
+	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700"/>
+	<link rel="stylesheet" href="#{resource['template:assets/css/bootstrap.min.css']}"/>
+	<link rel="stylesheet" href="#{resource['template:assets/css/font-awesome.min.css']}"/>
+
+	<!-- Custom styles for our template -->
+	<link rel="stylesheet" href="#{resource['template:assets/css/bootstrap-theme.css']}" media="screen"/>
+</h:head>
+
+<h:body>
+<ui:include src="/templates/header-snippet.xhtml" />
+<div class="container">
+		
+		<ol class="breadcrumb" style="background-color: rgb(255,255,255);">
+			<li><a href="">Home</a></li>
+			<li class="active">About</li>
+		</ol>
+
+		<div class="row">
+			
+			<!-- Article main content -->
+			<article class="col-sm-9 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">TIRESTORE</h1>
+				</header>
+				<br></br>
+					<ui:include src="/templates/page-snippet.xhtml" />
+				</article>
+				<aside class="col-sm-3 sidebar sidebar-right">
+
+				<div class="widget">
+					<h4>TEST</h4>
+					<address>
+						Szablon test test test
+					</address>
+					<h4>TEST:</h4>
+					<address>
+						TestTest
+					</address>
+				</div>
+
+			</aside>
+		</div>
+	</div>	<!-- /container -->
+			<ui:include src="/templates/footer-snippet.xhtml" />
+</h:body>
+
+</html>
