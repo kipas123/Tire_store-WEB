@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/templates/login-template.xhtml">
+	<ui:define name="topic-name">Rejestracja</ui:define>
+	<ui:define name="insertContent">
+		<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+			<div class="panel panel-default">
+				<div class="panel-body text-center">
+					<h3>Rejestracja</h3>
+
+					<p:panelGrid id="grid" columns="1" layout="flex"
+						columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4"
+						styleClass="customPanelGrid" contentStyleClass="ui-fluid">
+						<h:form id="bla">
+							<br></br>
+							<span class="ui-float-label" style=""> <p:inputText
+									id="username" value="#{registerCtrl.username}" required="true"
+									requiredMessage="Podaj Nazwę użytkownika!"
+									validatorMessage="Nazwa użytkownika nie może zawierać znaków specjalnych, a jego długośc musi mieścić się w zakresie 3-12">
+									<f:validateRegex
+										pattern="[a-zA-Z][a-zA-Z0-9-_]{3,12}" />
+								</p:inputText> <p:outputLabel
+									style="text-align: center;" for="username"
+									value="Nazwa użytkownika" />
+							</span>
+							<p:message for="username" />
+							<br></br>
+							<br></br>
+							<span class="ui-float-label" style=""> <p:password 
+									id="password" value="#{registerCtrl.password}" required="true"
+									requiredMessage="Podaj hasło!"
+									validatorMessage="Hasło musi być posiadać cyfrę, duże, małe litery i zawierać conajmniej 8 znaków">
+									<f:validateRegex
+										pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" />
+								</p:password> <p:outputLabel style="text-align: center;" for="password"
+									value="Hasło" />
+
+							</span>
+							<p:message for="password" />
+							<br></br>
+							<br></br>
+							<span class="ui-float-label"> <p:password id="confPass"
+									value="#{registerCtrl.confPass}" /> <p:outputLabel
+									for="confPass" value="Powtórz hasło" />
+							</span>
+							<p:message for="confPass" />
+							<br></br>
+							<br></br>
+							<span style="text-align: left; font-size: 20px;">Dane do
+								wysyłki:</span>
+							<span class="ui-float-label" style=""> <p:inputText
+									id="name" value="#{registerCtrl.name}" required="true"
+									requiredMessage="Podaj imię!"
+									validatorMessage="Imię nie powinno zawierać znaków specjalnych i cyfr">
+									<f:validateRegex pattern="^([ \u00c0-\u01ffa-zA-Z'\-])+$" />
+								</p:inputText> <p:outputLabel style="text-align: center;" for="name"
+									value="Imię" />
+							</span>
+							<p:message for="name" />
+							<br></br>
+							<br></br>
+							<span class="ui-float-label"> <p:inputText id="surname"
+									value="#{registerCtrl.surname}" required="true"
+									requiredMessage="Podaj nazwisko!"
+									validatorMessage="Nazwisko nie powinno zawierać znaków specjalnych i cyfr">
+									<f:validateRegex pattern="^([ \u00c0-\u01ffa-zA-Z'\-])+$" />
+								</p:inputText> <p:outputLabel for="surname" value="Nazwisko" />
+							</span>
+							<p:message for="surname" />
+							<br></br>
+							<br></br>
+							<span class="ui-float-label"> <p:inputText id="city"
+									value="#{registerCtrl.city}" required="true"
+									requiredMessage="Podaj miasto!"
+									validatorMessage="Miasto:Niepoprawne dane! Podaj poprawne dane.">
+									<f:validateLength minimum="3" maximum="20" />
+								</p:inputText> <p:outputLabel for="city" value="Miasto" />
+							</span>
+							<p:message for="city" />
+							<br></br>
+							<br></br>
+							<span class="ui-float-label"> <p:inputText id="street"
+									value="#{registerCtrl.street}" required="true"
+									requiredMessage="Podaj ulicę!"
+									validatorMessage="Ulica:Niepoprawne dane! Podaj poprawne dane.">
+									<f:validateLength minimum="3" maximum="20" />
+								</p:inputText> <p:outputLabel for="street" value="Ulica" />
+							</span>
+							<p:message for="street" />
+							<br></br>
+							<br></br>
+							<span class="ui-float-label"> <p:inputText
+									id="houseNumber" value="#{registerCtrl.houseNumber}"
+									required="true" requiredMessage="Podaj numer domu!"
+									validatorMessage="Numer domu:Niepoprawne dane! Podaj poprawne dane.">
+									<f:validateLength minimum="1" maximum="20" />
+								</p:inputText> <p:outputLabel for="houseNumber" value="Numer domu" />
+							</span>
+							<p:message for="houseNumber" />
+							<br></br>
+							<br></br>
+							<span class="ui-float-label"> <p:inputText id="zipCode"
+									value="#{registerCtrl.zipCode}" required="true"
+									requiredMessage="Podaj kod pocztowy!"
+									validatorMessage="Kod pocztowy:Niepoprawne dane! Podaj poprawne dane.">
+									<f:validateLength minimum="3" maximum="20" />
+								</p:inputText> <p:outputLabel for="zipCode" value="Kod pocztowy" />
+							</span>
+							<p:message for="zipCode" />
+							<br></br>
+							<br></br>
+							<span class="ui-float-label"> <p:inputText id="number"
+									value="#{registerCtrl.number}" /> <p:outputLabel for="number"
+									value="Numer telefonu" />
+							</span>
+							<br></br><br></br>
+							<p:commandButton value="Zarejestruj" id="ajax" update="grid"
+								action="#{registerCtrl.calc_AJAX()}" style="margin-right:20px;"
+								styleClass="ui-priority-primary" />
+						</h:form>
+						<p:messages id="msg" />
+						</p:panelGrid>
+
+
+				</div>
+			</div>
+		</div>
+
+
+	</ui:define>
+</ui:composition>
+</html>
