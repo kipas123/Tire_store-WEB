@@ -22,6 +22,7 @@ public class RemoteClient<T> {
 	private String remoteHost;
 	private int remotePort;
 	private T details;
+	private static final String PAGE_INDEX_EDIT = "/public/index";
 
 	private HashSet<String> roles = new HashSet<String>();
 
@@ -112,7 +113,13 @@ public class RemoteClient<T> {
 	public boolean isInRole(String role) {
 		return roles.contains(role);
 	}
+	public String isInRole2() {
+		if(!roles.isEmpty()) {
+			return PAGE_INDEX_EDIT;
+		}else return null;
+	}
 
+	
 	public boolean isInOneRole(HashSet<String> roles) {
 		boolean found = false;
 		for (String role : roles) {

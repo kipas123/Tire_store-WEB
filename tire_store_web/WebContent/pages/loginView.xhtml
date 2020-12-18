@@ -20,7 +20,7 @@
 						<h:form id="bla">
 							<br></br>
 							<span class="ui-float-label" style=""> <p:inputText
-									id="username" value="#{registerCtrl.username}" required="true"
+									id="username" value="#{loginCtrl.user.login}" required="true"
 									requiredMessage="Podaj Nazwę użytkownika!">
 								</p:inputText> <p:outputLabel style="text-align: center;" for="username"
 									value="Nazwa użytkownika" />
@@ -29,7 +29,7 @@
 							<br></br>
 							<br></br>
 							<span class="ui-float-label" style=""> <p:password
-									id="password" value="#{registerCtrl.password}" required="true"
+									id="password" value="#{loginCtrl.user.password}" required="true"
 									requiredMessage="Podaj hasło!">
 								</p:password> <p:outputLabel style="text-align: center;" for="password"
 									value="Hasło" />
@@ -39,7 +39,8 @@
 							<br></br>
 							<br></br>
 							<p:commandButton value="Zaloguj" id="ajax" update="grid"
-								style="margin-right:20px;" styleClass="ui-priority-primary" />
+								action="#{loginCtrl.login()}" style="margin-right:20px;"
+								styleClass="ui-priority-primary" />
 						</h:form>
 						<p:messages id="msg" />
 					</p:panelGrid>

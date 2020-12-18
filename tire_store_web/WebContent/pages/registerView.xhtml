@@ -20,7 +20,7 @@
 						<h:form id="bla">
 							<br></br>
 							<span class="ui-float-label" style=""> <p:inputText
-									id="username" value="#{registerCtrl.username}" required="true"
+									id="username" value="#{registerCtrl.user.login}" required="true"
 									requiredMessage="Podaj Nazwę użytkownika!"
 									validatorMessage="Nazwa użytkownika nie może zawierać znaków specjalnych, a jego długośc musi mieścić się w zakresie 3-12">
 									<f:validateRegex
@@ -33,7 +33,7 @@
 							<br></br>
 							<br></br>
 							<span class="ui-float-label" style=""> <p:password 
-									id="password" value="#{registerCtrl.password}" required="true"
+									id="password" value="#{registerCtrl.user.password}" required="true"
 									requiredMessage="Podaj hasło!"
 									validatorMessage="Hasło musi być posiadać cyfrę, duże, małe litery i zawierać conajmniej 8 znaków">
 									<f:validateRegex
@@ -55,7 +55,7 @@
 							<span style="text-align: left; font-size: 20px;">Dane do
 								wysyłki:</span>
 							<span class="ui-float-label" style=""> <p:inputText
-									id="name" value="#{registerCtrl.name}" required="true"
+									id="name" value="#{registerCtrl.user.name}" required="true"
 									requiredMessage="Podaj imię!"
 									validatorMessage="Imię nie powinno zawierać znaków specjalnych i cyfr">
 									<f:validateRegex pattern="^([ \u00c0-\u01ffa-zA-Z'\-])+$" />
@@ -66,7 +66,7 @@
 							<br></br>
 							<br></br>
 							<span class="ui-float-label"> <p:inputText id="surname"
-									value="#{registerCtrl.surname}" required="true"
+									value="#{registerCtrl.user.surname}" required="true"
 									requiredMessage="Podaj nazwisko!"
 									validatorMessage="Nazwisko nie powinno zawierać znaków specjalnych i cyfr">
 									<f:validateRegex pattern="^([ \u00c0-\u01ffa-zA-Z'\-])+$" />
@@ -76,7 +76,7 @@
 							<br></br>
 							<br></br>
 							<span class="ui-float-label"> <p:inputText id="city"
-									value="#{registerCtrl.city}" required="true"
+									value="#{registerCtrl.user.city}" required="true"
 									requiredMessage="Podaj miasto!"
 									validatorMessage="Miasto:Niepoprawne dane! Podaj poprawne dane.">
 									<f:validateLength minimum="3" maximum="20" />
@@ -86,7 +86,7 @@
 							<br></br>
 							<br></br>
 							<span class="ui-float-label"> <p:inputText id="street"
-									value="#{registerCtrl.street}" required="true"
+									value="#{registerCtrl.user.street}" required="true"
 									requiredMessage="Podaj ulicę!"
 									validatorMessage="Ulica:Niepoprawne dane! Podaj poprawne dane.">
 									<f:validateLength minimum="3" maximum="20" />
@@ -96,7 +96,7 @@
 							<br></br>
 							<br></br>
 							<span class="ui-float-label"> <p:inputText
-									id="houseNumber" value="#{registerCtrl.houseNumber}"
+									id="houseNumber" value="#{registerCtrl.user.housenumber}"
 									required="true" requiredMessage="Podaj numer domu!"
 									validatorMessage="Numer domu:Niepoprawne dane! Podaj poprawne dane.">
 									<f:validateLength minimum="1" maximum="20" />
@@ -106,7 +106,7 @@
 							<br></br>
 							<br></br>
 							<span class="ui-float-label"> <p:inputText id="zipCode"
-									value="#{registerCtrl.zipCode}" required="true"
+									value="#{registerCtrl.user.zipcode}" required="true"
 									requiredMessage="Podaj kod pocztowy!"
 									validatorMessage="Kod pocztowy:Niepoprawne dane! Podaj poprawne dane.">
 									<f:validateLength minimum="3" maximum="20" />
@@ -116,12 +116,12 @@
 							<br></br>
 							<br></br>
 							<span class="ui-float-label"> <p:inputText id="number"
-									value="#{registerCtrl.number}" /> <p:outputLabel for="number"
+									value="#{registerCtrl.user.phoneNumber}" /> <p:outputLabel for="number"
 									value="Numer telefonu" />
 							</span>
 							<br></br><br></br>
 							<p:commandButton value="Zarejestruj" id="ajax" update="grid"
-								action="#{registerCtrl.calc_AJAX()}" style="margin-right:20px;"
+								action="#{registerCtrl.register_AJAX()}" style="margin-right:20px;"
 								styleClass="ui-priority-primary" />
 						</h:form>
 						<p:messages id="msg" />
