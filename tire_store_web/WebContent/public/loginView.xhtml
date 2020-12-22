@@ -5,18 +5,22 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
-	<!--<f:metadata>
+<!--<f:metadata>
     <f:viewAction action="#{loginCtrl.isInrole()}" />
 </f:metadata> -->
 
 <ui:composition template="/templates/login-template.xhtml">
-	<ui:define name="topic-name">Logowanie</ui:define>
+	<ui:define name="topic-name"><span style="color:white;">Logowanie</span></ui:define>
 	<ui:define name="insertContent">
 		<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 			<div class="panel panel-default">
 				<div class="panel-body text-center">
 					<h3>Logowanie</h3>
-
+					<p>
+						Jeżeli nie masz konta
+						<p:link outcome="#{registerCtrl.registerPage()}" value="Zarejestruj się">
+						</p:link>
+					</p>
 					<p:panelGrid id="grid" columns="1" layout="flex"
 						columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4"
 						styleClass="customPanelGrid" contentStyleClass="ui-fluid">
@@ -32,8 +36,8 @@
 							<br></br>
 							<br></br>
 							<span class="ui-float-label" style=""> <p:password
-									id="password" value="#{loginCtrl.user.password}" required="true"
-									requiredMessage="Podaj hasło!">
+									id="password" value="#{loginCtrl.user.password}"
+									required="true" requiredMessage="Podaj hasło!">
 								</p:password> <p:outputLabel style="text-align: center;" for="password"
 									value="Hasło" />
 
@@ -52,8 +56,6 @@
 				</div>
 			</div>
 		</div>
-
-
 	</ui:define>
 </ui:composition>
 </html>

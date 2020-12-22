@@ -32,11 +32,17 @@ public class LoginCtrl {
 	}
 
 	public String loginPage() {
-		return PAGE_LOGIN_EDIT;
+		HttpSession session = (HttpSession) ctx.getExternalContext().getSession(true);
+		if(RemoteClient.load(session)==null) return PAGE_LOGIN_EDIT;
+		else return PAGE_INDEX_EDIT;
+
 	}
 
 	public String adminPage() {
 		return PAGE_ADMIN_EDIT;
+	}
+	public String figlerPage() {
+		return "/public/figler";
 	}
 
 	public String indexPage() {
@@ -44,8 +50,9 @@ public class LoginCtrl {
 	}
 
 	public String login() {
+		userLogin = userDAO.getloginAccount(user.getLogin(), user.getPassword());
 		// 1.Search user in DB
-		if (loginAuthentication()) {
+		if (this.userLogin != null) {
 
 			// 2. if logged in: get User roles, save in RemoteClient and store it in session
 
@@ -70,24 +77,11 @@ public class LoginCtrl {
 		}
 	}
 
-	private boolean loginAuthentication() {
-
-		userLogin = userDAO.getloginAccount(user.getLogin(), user.getPassword());
-		if (this.userLogin != null) {
-			return true;
-		} else {
-			return false;
-		}
-
-	}
-//	public String isInrole() {
-//		HttpSession session;
-//		session.getAttribute;
-//		session.
-//		RemoteClient<User> client = new RemoteClient<User>();
-//		client.load(session);
-//		client.isInRole2();
-//		return null;
+//	public  isInanyrole() {
+//		HttpSession session = (HttpSession) ctx.getExternalContext().getSession(true);
+//
+//		if(RemoteClient.load(session)!=null) return null;
+//		else return PAGE_INDEX_EDIT;
 //	}
 
 	public String doLogout() {

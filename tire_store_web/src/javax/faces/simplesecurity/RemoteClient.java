@@ -113,11 +113,11 @@ public class RemoteClient<T> {
 	public boolean isInRole(String role) {
 		return roles.contains(role);
 	}
-	public String isInRole2() {
-		if(!roles.isEmpty()) {
-			return PAGE_INDEX_EDIT;
-		}else return null;
-	}
+//	public String isInRole2() {
+//		if(!roles.isEmpty()) {
+//			return PAGE_INDEX_EDIT;
+//		}else return null;
+//	}
 
 	
 	public boolean isInOneRole(HashSet<String> roles) {

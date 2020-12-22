@@ -1,3 +1,9 @@
+.clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
 /* Header */
 #head { background:#181015 url( ../images/bg_header.jpg) no-repeat; background-size: cover; min-height:520px; text-align: center; padding-top:240px; color:white; font-family:"Open sans", Helvetica, Arial; font-weight:300; }
 #head.secondary { height:100px; min-height: 100px; padding-top:0px; }
@@ -15,8 +21,338 @@
 	#head { min-height:420px; padding-top:160px; }
 	#head .lead { font-size: 34px; }
 }
+/* ceontent-welcome */
+#welcome {
+	margin: 0 0; 
+    width: 100vw;  
+    height: 100vh;
+	background-image: url("#{resource['template:assets/images/tire1.jpg']}");
+	text-align: center;
+}
+#welcome .offers a .offer {
+    display:block;
+    background-size: cover;
+    background-position: center;
+}
+ #welcome .hello h1 {
+	margin-top: 20vh;
+	background-color: black;
+	opacity: 0.7;
+	color: white;
+	font-size: 50px;
+ }
+ #welcome .hello h3 {
+	background-color: black;
+	opacity: 0.7;
+	color: white;
+	font-size: 30px;
+ }
+ .offers {
+	width: 100vw;
+	margin:40px auto 0;
+	border-radius: 10px;
+ }
+.offers .offer {
+     width: 90%;
+     height: 15vh;
+     margin: 5px auto;
+     /* padding-bottom: 5px; */
+	 background-position: center;
+     background-repeat: no-repeat;
+ }
+.offers a:nth-child(1) .offer {
+    background-image: url("#{resource['template:assets/images/osobowy_2.png']}");
+    display: block;
+    background-size: cover;
+    background-position: center;
+ }
+.offers a:nth-child(2) .offer{
+    background-image: url("#{resource['template:assets/images/tir.png']}");
+    display: block;
+    background-size: cover;
+    background-position: center;
+ }
+.offers a:nth-child(3) .offer{
+    background-image: url("#{resource['template:assets/images/about_us.png']}");
+    display: block;
+    background-size: cover;
+    background-position: center;
+ }
+#welcome .offers a .offer p {
+    font-family: 'Saira', sans-serif;
+    color: white;
+    text-align: center;
+    line-height: 15vh; 
+    text-shadow: 0 0 4px black;
+    background-color: rgba(0,0,0,0.5);
+    font-size: 30px;
+    padding: 5px 0 10px 0;
+}
+@media(min-width:533px) {
+    .odders .offer {
+        float: left;
+    }
+    #welcome .offers {
+        width: 90vw;
+    }
+    #welcome .offers a .offer p {
+        font-size: 30px;
+        padding: 0;
+        margin: 0;
+    }
+}
+@media(min-width:768px) {
+    #welcome .hello h1 {
+        margin-top: 20vh;
+        background-color: black;
+        opacity: 0.7;
+        color: white;
+        font-size: 100px;
+     }
+     #welcome .hello h3 {
+        background-color: black;
+        opacity: 0.7;
+        color: white;
+        font-size: 50px;
+     }
+    #welcome .offers {
+        width: 70vw;
+    }
+    .offers .offer p {
+        font-size: 30px;
+        padding: 15px 0;
+    }
+}
+@media(min-width:1024px) {
+    #welcome .offers {
+        box-sizing: border-box;
+        width: 90vw;
+        margin: 10vh auto 0;
+    }
+    #welcome .offers .offer {
+        float: left;
+        width: 32%;
+        height: 30vh;
+        margin: 0 5px;
+        border-radius: 10px;
+    }
+    #welcome .offers .offer p {
+        padding: 0;
+        opacity: 0;
+        line-height: 100%;
+        transition: 0.4s;
+        cursor: default;
+    }
+    #welcome .offers .offer:hover p {
+        text-decoration: none;
+        padding: 0;
+        font-size: 30px;
+        line-height: 30vh;
+        opacity: 1;
+        border-radius: 10px;
+    }
+    #welcome .offers a:nth-child(1) .offer:hover p {
+        line-height:30vh;
+     }
+     #welcome .offers a:nth-child(2) .offer:hover p {
+        line-height:30vh;
+     }
+    .offers .offer {
+        background-size: 100%;
+        transition: 0.4s;
+    }
+    .offers .offer:hover {
+        background-size: 130%;
+    }
+}
+@media(min-width:1600px) {
+    .offers h1 {
+        font-size: 60px;
+        margin-top: 50px;
+        margin-bottom: 45px;
+    }
+    .offers .offer p {
+        font-size: 40px;
+    }
+}
+/* Content - features */
+.features {
+    max-width: 1600px;
+    margin: 20px auto 0;
+    padding: 2%;
+    text-align: center;
+}
+.features h1 {
+    font-family: 'Saira Condensed', sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;
+    margin-bottom:10px;
+}
+.features h2 {
+    font-family: 'Saira Condensed', sans-serif;
+    font-size: 22px;
+    text-transform: uppercase;
+}
+.features p {
+    font-family: 'Saira', sans-serif;
+    font-size: 22px;
+    text-transform: uppercase;
+    font-weight: 300;
+    margin: 20px 0;
+}
+.features img {
+    width: 100%;
+    margin:5px 0;
+    max-width: 375px;
+}
+@media (min-width:360px) {
+    .features h1 {
+        font-size: 28px;
+    }
+    .features h2 {
+        font-size: 24px;
+    }
+    .features p {
+        font-size: 14px;
 
+    }
+}
+@media (min-width:768px) {
+    .features h1 {
+        font-size: 36px;
+    }
+    .features h2 {
+        font-size: 28px;
+    }
+    .features p {
+        font-size: 18px;
 
+    }
+}
+@media (min-width:1024px) {
+    .features {
+        margin-top: 50px;
+        padding: 5% 2%;
+        text-align: center;
+    }
+    .feature {
+        float: left;
+        width: 33%;
+        padding: 20px;
+    }
+    .features h1 {
+        font-size: 36px;
+    }
+    .features h2 {
+        font-size: 20px;
+    }
+    .features p {
+        font-size: 16px;
+        line-height: 120%;
+        padding: 0 10px;
+    }
+}
+@media(min-width:1600px) {
+    .feature {
+		padding: 10px 30px;
+		margin: 2px;
+		transition: 0.2s;
+    }
+    .features h1 {
+        font-size: 50px;
+    }
+    .features h2 {
+        font-size: 24px;
+    }
+    .features p {
+        font-size: 17px;
+        line-height: 140%;
+		padding: 0 10px;
+	}
+}
+/* content- our motto */
+.slogan {
+    text-align: center;
+    background-image: url("#{resource['template:assets/images/tire1.jpg']}");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+}
+
+.slogan h1 {
+    font-family: 'Saira Condensed', sans-serif;
+    font-size: 26px;
+    text-transform: uppercase;
+    margin-bottom:25px;
+}
+
+.slogan p {
+    font-family: 'Saira', sans-serif;
+    font-size: 10px;
+}
+
+.slogan p.author {
+    font-size:12px;
+    margin-top: 12px;
+}
+
+.slogan .bg {
+    padding: 30px 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+@media(orientation:landscape) {
+    .slogan p {
+        width:70%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media(min-width: 768px) {
+    .slogan h1 {
+        font-size: 38px;
+        margin-bottom:35px;
+    }
+    
+    .slogan p {
+        font-family: 'Saira', sans-serif;
+        font-size: 26px;
+        width: 60%;
+        margin: 0 auto;
+    }
+    
+    .slogan p.author {
+        font-size: 40px;
+        margin-top: 18px;
+    }
+    .slogan .bg {
+        padding: 50px 10px;
+    }
+}
+
+@media(min-width: 1024px) {
+    .slogan h1 {
+        font-size: 60px;
+        margin-bottom:55px;
+    }
+    
+    .slogan p {
+        font-family: 'Saira', sans-serif;
+        font-size: 40px;
+        width: 60%;
+        margin: 0 auto;
+    }
+    
+    .slogan p.author {
+        font-size: 26px;
+        margin-top: 40px;
+    }
+    .slogan .bg {
+        padding: 80px 10px;
+    }
+}
 /* Autohide navbar */
 .slideUp { top:-100px; }
 .headroom { -webkit-transition: all 0.4s ease-out; -moz-transition: all 0.4s ease-out; -o-transition: all 0.4s ease-out; transition: all 0.4s ease-out; }
@@ -27,7 +363,6 @@
 	.h-caption { text-align: center; } 
 	.h-caption i { display:block; font-size: 54px; color:#382526; margin-bottom:36px; }
 	.h-caption h4 { color:#382526; font-size: 16px; font-weight: bold; margin-bottom:20px; }
-	.h-body { }
 
 
 /* Typography */
@@ -43,6 +378,8 @@ ul.list-spaces li{ margin-bottom:10px; }
 
 /* Helpers */
 .container-full { margin: 0 auto; width: 100%; }
+.container-full2 { margin: 0 auto; width: 80%; }
+.container-full3 { margin: 0 auto; width: 80%; font-size:10px;}
 .top-space { margin-top: 60px; }
 .top-margin { margin-top:20px; }
 
@@ -53,50 +390,87 @@ img.pull-left { margin-right: 10px; }
 #social { margin-top:50px; margin-bottom:50px; }
 	#social .wrapper { width:340px; margin:0 auto; }
 
-/* Main content block */
-.maincontent { }
-
 /* Sidebars */
 .sidebar { padding-top:36px; padding-bottom:30px; }
 	.sidebar .widget { margin-bottom:20px; }
 	.sidebar h1, .sidebar .h1, .sidebar h2, .sidebar .h2, .sidebar h3, .sidebar .h3 { margin-top:20px; } 
 
 /* Footer */
-.footer1 { background: #232323; padding: 30px 0 0 0; font-size: 12px; color: #999; }
-	.footer1 a { color: #ccc; }
-		.footer1 a:hover {color: #fff; }
-	.footer1 .widget { margin-bottom:30px; }		
-	.footer1 .widget-title { font-size: 17px; font-weight: bold; color: #ccc; margin: 0 0 20px; }
-	.footer1 .entry-meta { border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; margin: 0 0 35px 0; padding: 2px 0; color: #888888; font-size: 12px; font-size: 0.75rem; }
-		.footer1 .entry-meta a { color: #333333; }
-		.footer1 .entry-meta .meta-in { border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; padding: 10px 0; }
-	.follow-me-icons { font-size:30px; }		
-		.follow-me-icons i { float:left; margin:0 10px 0 0; }		
-
-.footer2 { background: #191919; padding: 15px 0; color: #777; font-size: 12px; margin-top:150px;}
-	.footer2 a { color: #aaa; }
-		.footer2 a:hover { color: #fff; }
-		.footer2 p { margin: 0; }
-
-	.widget-simplenav { margin-left:-5px; }		
-	.widget-simplenav a{ margin:0 5px; }		
-	
-	.col-sm-4{
-		clear:both;
-		padding: 15px;
-	}
-	.test{
-		font-size: 50px;
-	}
-.btn-action{
-	height: 50px;
-	margin-left: 0px;
-	margin-top:20px;
+#footer {
+	margin-top: 0;
 }
+.footer1 { 
+	background: #232323;
+	padding: 50px 0 0 0;
+	font-size: 12px;
+	color: #999; 
+}
+.footer1 a {
+	color: #ccc; 
+}
+.footer1 a:hover {
+	color: #fff; 
+}
+.footer1 .widget {
+	margin-bottom:30px; 
+}		
+.footer1 .widget-title {
+	font-size: 17px;
+	font-weight: bold;
+	color: #ccc;
+	margin: 0 0 20px; 
+}
+.footer1 .entry-meta {
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	margin: 0 0 35px 0;
+	padding: 2px 0;
+	color: #888888;
+	font-size: 12px;
+	font-size: 0.75rem; 
+}
+.footer1 .entry-meta a {
+	color: #333333; 
+}
+.footer1 .entry-meta .meta-in {
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	padding: 10px 0; 
+}
+.follow-me-icons { 
+	font-size:30px;
+}		
+.follow-me-icons i { 
+	float:left; margin:0 10px 0 0; 
+}		
 
-.tekscik{
-    font-size: 20px;
-    color: grey;
-    padding-bottom: 50px;
-
+.footer2 {
+	background: #191919;
+	padding: 15px 0;
+	color: #777;
+	font-size: 5px; 
+}
+.footer2 a {
+	color: #aaa;
+ }
+.footer2 a:hover { 
+	color: #fff; 
+}
+.footer2 p {
+	 margin: 0;
+}
+.widget-simplenav { 
+	margin-left:-5px;
+ }		
+.widget-simplenav a{
+	 margin:0 5px; 
+}
+.header-font-size{
+	font-size: 18px;
+}
+.testpm{
+	background-image: url("#{resource['template:assets/images/tire1.jpg']}");
+}
+.testpmn{
+	background: none;
 }

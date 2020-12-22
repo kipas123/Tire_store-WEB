@@ -5,33 +5,187 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="title">Kalkulator</ui:insert></title>
+	<h:outputStylesheet name="assets/css/main.css" library="template" />
+	<link rel="stylesheet" media="screen"
+		href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700" />
+	<link rel="stylesheet"
+		href="#{resource['template:assets/css/bootstrap.min.css']}" />
+	<link rel="stylesheet"
+		href="#{resource['template:assets/css/font-awesome.min.css']}" />
 
+	<!-- Custom styles for our template -->
+	<link rel="stylesheet"
+		href="#{resource['template:assets/css/bootstrap-theme.css']}"
+		media="screen" />
+</h:head>
 
-<ui:composition template="/templates/main-template.xhtml">
-	<ui:define name="topic-name">Main Page</ui:define>
-	<ui:define name="insertContent">
+<body class="home">
+	<!-- Fixed navbar -->
+	<div class="navbar navbar-inverse navbar-fixed-top headroom">
+		<div class="container-full2">
+			<div class="navbar-header">
+				<!-- Button for smallest screens -->
+				<a class="navbar-brand" href="http://localhost:8080/tire_store/"><img
+					src="#{resource['template:assets/images/logo.png']}" height="150%"
+					alt="Progressus HTML5 template"></img></a>
+			</div>
+			<br></br>
+					<h:form>
+			<p:menubar
+				style="float:right;color: white;background: rgba(0,0,0,0.5); font-size:20px; border:none;">
 
-		<h:form>
-			<p:commandButton value="Logowanie" action="#{loginCtrl.loginPage()}"
-				style="margin-bottom:1em;" />
-			<p:commandButton value="Rejestracja"
-				action="#{registerCtrl.registerPage()}" style="margin-bottom:1em;" />
+				<p:menuitem style="font-size:18px; background-color: #bfbfbf;" value="Home"
+					action="#{registerCtrl.registerPage()}" ajax="false" />
+				<p:submenu style="font-size:18px;" label="Opony">
+					<p:menuitem value="Opony samochodowe" url="#" />
+					<p:menuitem value="Opony ciężarowe" url="#" />
+				</p:submenu>
+				<p:menuitem style="font-size:18px; color: red;" value="O nas"
+					action="#{registerCtrl.registerPage()}" ajax="false" />
 
-			<p:commandButton value="Strona admina"
-				action="#{loginCtrl.adminPage()}" style="margin-bottom:1em;" />
-			<p:commandButton value="Wyloguj" id="ajax" update="msg"
-				action="#{loginCtrl.doLogout()}" style="margin-right:20px;"
-				styleClass="ui-priority-primary" />
+				<f:facet name="options">
+					<p:commandButton value="Zaloguj"
+				action="#{loginCtrl.loginPage()}" icon="pi pi-home"  />
+				</f:facet>
+			</p:menubar>
 		</h:form>
 
-		<p:messages id="msg" />
+		</div>
 
+	</div>
+	<!-- /.navbar -->
+	<section id="welcome" class="clearfix"> <section
+		class="startPage clearfix">
+	<div class="hello">
+		<h1>PROGRESSUS</h1>
+		<h3>LEADER IN THE AUTOMOTIVE MARKET</h3>
+	</div>
+	<div class="offers clearfix">
+		<a href=""><div
+				class="offer">
+				<p>OPONY OSOBOWE</p>
+			</div></a> <a href=""><div
+				class="offer">
+				<p>OPONY CIĘŻAROWE</p>
+			</div></a> <a href=""><div
+				class="offer">
+				<p>ABOUT US</p>
+			</div></a>
+	</div>
+	</section> </section>
+	<section class="features clearfix">
+	<h1>Tworzę bardzo dobre strony internetowe</h1>
+	<div class="feature">
+		<img src="#{resource['template:assets/images/services1.png']}"
+			alt="logo html css i js"></img>
+		<h2>Nowoczesne i zgodne z aktualnymi standardami</h2>
+		<p class="description">Lorem ipsum dolor sit amet consectetur
+			adipisicing elit. Obcaecati, dignissimos accusantium nam, maiores ad
+			voluptate, fuga velit aspernatur illum commodi facilis.</p>
+	</div>
+	<div class="feature clearfix">
+		<img src="#{resource['template:assets/images/services2.png']}"
+			alt="google"></img>
+		<h2>Zoptymalizowane pod kątem wyszukiwarek internetowych</h2>
+		<p class="description">Lorem ipsum dolor sit amet consectetur
+			adipisicing elit. Obcaecati, dignissimos accusantium nam, maiores ad
+			voluptate, fuga velit aspernatur illum commodi facilis.</p>
+	</div>
+	<div class="feature">
+		<img src="#{resource['template:assets/images/services3.png']}"
+			alt="tel tv desk"></img>
+		<h2>Świetnie wyglądające na urządzeniach mobilnych</h2>
+		<p class="description">Lorem ipsum dolor sit amet consectetur
+			adipisicing elit. Obcaecati, dignissimos accusantium nam, maiores ad
+			voluptate, fuga velit aspernatur illum commodi facilis.</p>
+	</div>
+	</section>
+	<section class="slogan">
+	<div class="bg">
+		<h1>COMPANY MOTTO</h1>
+		<p class="text">Lorem ipsum dolor sit amet consectetur adipisicing
+			elit. Consectetur provident mollitia, voluptatum optio corrupti dolor
+			deserunt nobis tempora placeat, accusamus voluptatibus.</p>
+		<p class="author">Błażej Tomaszowski</p>
+	</div>
+	</section>
+	<footer id="footer" class="top-space">
+	<div class="footer1">
+		<div class="container-full2 header-font-size">
+			<div class="row">
 
+				<div class="col-md-3 widget">
+					<h3 class="widget-title">Contact</h3>
+					<div class="widget-body">
+						<p>
+							+234 23 9873237<br></br> <a href="mailto:#">some.email@somewhere.com</a><br></br>
+							<br></br> 234 Hidden Pond Road, Ashland City, TN 37015
+						</p>
+					</div>
+				</div>
 
+				<div class="col-md-3 widget">
+					<div class="widget-body">
+						<p class="follow-me-icons"></p>
+					</div>
+				</div>
 
+				<div class="col-md-6 widget">
+					<h3 class="widget-title">Text widget</h3>
+					<div class="widget-body">
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+							Excepturi, dolores, quibusdam architecto voluptatem amet fugiat
+							nesciunt placeat provident cumque accusamus itaque voluptate modi
+							quidem dolore optio velit hic iusto vero praesentium repellat
+							commodi ad id expedita cupiditate repellendus possimus unde?</p>
+					</div>
+				</div>
 
+			</div>
+			<!-- /row of widgets -->
+		</div>
+	</div>
+	<div class="footer2">
+		<div class="container-full2 header-font-size">
+			<div class="row">
 
+				<div class="col-md-6 widget">
+					<div class="widget-body">
+						<p class="simplenav">
+							<a href="#">Home</a> | <a href="about.html">About</a> | <a
+								href="sidebar-right.html">Sidebar</a> | <a href="contact.html">Contact</a>
+							| <b><a href="signup.html">Sign up</a></b>
+						</p>
+					</div>
+				</div>
 
-	</ui:define>
-</ui:composition>
+				<div class="col-md-6 widget">
+					<div class="widget-body">
+						<p class="text-right">
+							Copyright
+							&copy;
+							2014, Your name. Designed by <a href="http://gettemplate.com/"
+								rel="designer">gettemplate</a>
+						</p>
+					</div>
+				</div>
+
+			</div>
+			<!-- /row of widgets -->
+		</div>
+	</div>
+
+	</footer>
+	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+	<script
+		src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script
+		src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<script src="assets/js/headroom.min.js"></script>
+	<script src="assets/js/jQuery.headroom.min.js"></script>
+	<script src="assets/js/template.js"></script>
+</body>
 </html>

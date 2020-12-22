@@ -8,7 +8,7 @@
 
 
 <ui:composition template="/templates/main-template.xhtml">
-	<ui:define name="topic-name">Strona administratora</ui:define>
+	<ui:define name="topic-name">Strona administratora #{remoteClient.details.role.name}</ui:define>
 	<ui:define name="insertContent">
 
 

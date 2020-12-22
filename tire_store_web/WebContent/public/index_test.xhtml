@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+<ui:composition template="/templates/main-template.xhtml">
+	<ui:define name="topic-name">Main Page</ui:define>
+	<ui:define name="insertContent">
+
+		<h:form>
+			<p:commandButton value="Logowanie" action="#{loginCtrl.loginPage()}"
+				style="margin-bottom:1em;" />
+			<p:commandButton value="Rejestracja"
+				action="#{registerCtrl.registerPage()}" style="margin-bottom:1em;" />
+
+			<p:commandButton value="Strona admina"
+				action="#{loginCtrl.adminPage()}" style="margin-bottom:1em;" />
+			<p:commandButton value="Wyloguj" id="ajax" update="msg"
+				action="#{loginCtrl.doLogout()}" style="margin-right:20px;"
+				styleClass="ui-priority-primary" />
+
+
+				<p:commandButton value="Figler"
+				action="#{loginCtrl.figlerPage()}" style="margin-bottom:1em;" />
+		</h:form>
+
+		<p:messages id="msg" />
+
+	</ui:define>
+</ui:composition>
+</html>
