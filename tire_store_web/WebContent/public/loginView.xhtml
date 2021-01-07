@@ -10,7 +10,9 @@
 </f:metadata> -->
 
 <ui:composition template="/templates/login-template.xhtml">
-	<ui:define name="topic-name"><span style="color:white;">Logowanie</span></ui:define>
+	<ui:define name="topic-name">
+		<span style="color: white;">Logowanie</span>
+	</ui:define>
 	<ui:define name="insertContent">
 		<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 			<div class="panel panel-default">
@@ -18,7 +20,8 @@
 					<h3>Logowanie</h3>
 					<p>
 						Jeżeli nie masz konta
-						<p:link outcome="#{registerCtrl.registerPage()}" value="Zarejestruj się">
+						<p:link outcome="#{registerCtrl.registerPage()}"
+							value="Zarejestruj się">
 						</p:link>
 					</p>
 					<p:panelGrid id="grid" columns="1" layout="flex"
