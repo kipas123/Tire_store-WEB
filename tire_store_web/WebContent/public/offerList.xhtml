@@ -14,21 +14,31 @@
 		<span style="color: white;">Opony osobowe</span>
 	</ui:define>
 	<ui:define name="insertContent">
-	
-	<ui:repeat value="#{offerList.list}" var="item">
-			                    <div class="col-12 col-sm-12 offer" style="background-color: white; border: medium solid black;">
-                        <div class="col-sm-3 imgPlace"><img src="#{resource['template:assets/images/tire.png']}" class="img-fluid" alt="Responsive image" height="150px"></img></div>
-                        <div class="col-sm-8 offerText"><p style="font-size:20px;">#{item.getTireproduct().brand} #{item.getTireproduct().model}</p><br></br>
-                        #{item.shortdescription} 
-                            <div style="text-align: right; clear:both; margin: 5px 0;">
-                                <a href="{$conf->action_url}offer/" target="_blank">
-                                    <button class="btn btn-action" type="submit">Przejdz ---></button>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="offerInfo">Brand:#{item.getTireproduct().brand} Model:#{item.getTireproduct().model} Size:#{item.getTireproduct().size} Price:#{item.price}zł</div>
-                    </div>
-        </ui:repeat>   
+
+		<ui:repeat value="#{offerList.list}" var="item">
+			<div class="col-12 col-sm-12 offer"
+				style="background-color: white; border: medium solid black;">
+				<div class="col-sm-3 imgPlace">
+					<img src="#{resource['template:assets/images/tire.png']}"
+						class="img-fluid" alt="Responsive image" height="150px"></img>
+				</div>
+				<div class="col-sm-8 offerText">
+					<p style="font-size: 20px;">#{item.getTireproduct().brand}
+						#{item.getTireproduct().model}</p>
+					<br></br> #{item.shortdescription}
+					<div style="text-align: right; clear: both; margin: 5px 0;">
+						<h:form>
+							<p:commandButton value="Strona admina"
+								action="#{offerList.offerDetails(item)}" style="margin-bottom:1em;" />
+						</h:form>
+					</div>
+
+				</div>
+				<div class="offerInfo">Brand:#{item.getTireproduct().brand}
+					Model:#{item.getTireproduct().model}
+					Size:#{item.getTireproduct().size} Price:#{item.price}zł</div>
+			</div>
+		</ui:repeat>
 
 
 	</ui:define>

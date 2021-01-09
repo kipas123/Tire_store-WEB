@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<!--<f:metadata>
+    <f:viewAction action="#{loginCtrl.isInrole()}" />
+</f:metadata> -->
+
+<f:metadata>
+    <f:viewAction action="#{offerDetails.onLoad()}" />
+</f:metadata>
+
+<ui:composition template="/templates/offerlist-template.xhtml">
+<ui:define name="topic-name">
+		<span style="color: white;">Opony osobowe</span>
+	</ui:define>
+	<ui:define name="insertContent">
+
+    <div class="col-sm-12 col-md-6 col-md-offset-3 offerView" >
+    <div class="col-sm-6" style="opacity: 1; !important"><img src="#{resource['template:assets/images/tire.png']}" class="img-fluid" alt="Responsive image"></img></div>
+    <div class="col-sm-6 "><p style="font-size: 30px; padding:10px; margin-right: 10px;">#{offerDetails.offer.getTireproduct().brand} #{offerDetails.offer.getTireproduct().model} #{offerDetails.offer.getTireproduct().size}</p>
+    
+    <table class="table table-dark">
+    <h:form>
+            <tbody>
+                <tr>
+                    <td>Cena szt.</td>
+                    <td>#{offerDetails.offer.price}zł</td>
+                </tr>
+                <tr>
+                    <td><p:inputNumber id="quantity" size="1" decimalPlaces="0" value = "#{offerDetails.quantity}" minValue="1" maxValue="1000">  
+                   			<p:ajax update="output1" /> 
+                </p:inputNumber></td>
+                    <td>Szt.</td>
+                </tr>
+                <tr>
+                    <td>Do zapłaty:</td>
+                    <td><p:inputText id="output1" size="8" disabled="true" value="#{offerDetails.quantity != null ?
+            offerDetails.sumprice() : '2.0'}"/> </td>
+                </tr>
+            </tbody>
+            </h:form>
+        </table>
+    </div>
+            <div class="col-sm-12"><p:commandButton value="Kup teraz" action="#{loginCtrl.loginPage()}"
+				style="opacity:1.0;background-color: orange;margin-bottom:1em; float:right;" />
+				</div>
+				<div style="clear:both;"></div>
+    <div class="col-sm-12">
+    <p:dataTable value="#{offerDetails.offer}" var="offer">
+    <p:column headerText="Marka">
+        <h:outputText value="#{offer.getTireproduct().brand}" />
+    </p:column>
+ 
+    <p:column headerText="Model">
+        <h:outputText value="#{offer.getTireproduct().model}" />
+    </p:column>
+ 
+    <p:column headerText="Rodzaj opony">
+        <h:outputText value="#{offer.getTireproduct().getTiretype().name}" />
+    </p:column>
+ <p:column headerText="Wielkość">
+        <h:outputText value="#{offer.getTireproduct().size}" />
+    </p:column>
+    <p:column headerText="Magazyn">
+        <h:outputText value="#{offer.quantity}" />
+    </p:column>
+    <p:column headerText="Cena">
+        <h:outputText value="#{offer.price}" />
+    </p:column>
+</p:dataTable>
+<br></br>
+<p>#{offerDetails.offer.description}
+</p>
+
+</div>
+
+    </div>
+
+	</ui:define>
+</ui:composition>
+</html>
