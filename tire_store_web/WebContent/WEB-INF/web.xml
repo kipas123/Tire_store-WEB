@@ -35,7 +35,7 @@
 		<filter-class>javax.faces.simplesecurity.SecurityFilter</filter-class>
 		<init-param>
 			<param-name>noPermitionPage</param-name>
-			<param-value>/pages/loginView.xhtml</param-value>
+			<param-value>/public/loginView.xhtml</param-value>
 		</init-param>
 		<init-param>
 			<param-name>permissions</param-name>

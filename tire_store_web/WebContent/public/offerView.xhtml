@@ -8,9 +8,15 @@
 <!--<f:metadata>
     <f:viewAction action="#{loginCtrl.isInrole()}" />
 </f:metadata> -->
-
+<!--
 <f:metadata>
     <f:viewAction action="#{offerDetails.onLoad()}" />
+</f:metadata>
+-->
+<f:metadata>
+	<f:viewParam name="item" value="#{offerDetails.offer.idoffer}"
+		converterMessage="Nieoczekiwany błąd"/>
+	<f:event type="preRenderView" listener="#{offerDetails.onLoad()}" />
 </f:metadata>
 
 <ui:composition template="/templates/offerlist-template.xhtml">

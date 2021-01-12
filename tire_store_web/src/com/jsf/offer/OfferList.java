@@ -34,6 +34,10 @@ public class OfferList implements Serializable {
 		return PAGE_OFFERLIST;
 
 	}
+	public String accountPage() {
+		return "/pages/user/account?faces-redirect=true";
+
+	}
 	
 	public List<Offer> getList(){
 		return offerDAO.getOffer((byte)1);

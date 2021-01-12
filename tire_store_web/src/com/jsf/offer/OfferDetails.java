@@ -54,7 +54,10 @@ public class OfferDetails implements Serializable {
 	}
 
 	
-	
+	public String indexPage() {
+		return "/public/index?faces-redirect=true";
+
+	}
 	
 	
 	public String offerViewPage() {
@@ -63,23 +66,37 @@ public class OfferDetails implements Serializable {
 	}
 	
 	public void onLoad() throws IOException {
+		if (!ctx.isPostback()) {
+			if (!ctx.isValidationFailed()) {
+				loaded = offerDAO.get(offer.getIdoffer());
+			}
+			if (loaded != null) {
+				offer = loaded;
+			} else {
+				ctx.getExternalContext().redirect("/tire_store");
+				// if (!context.isPostback()) { // possible redirect
+				// context.getExternalContext().redirect("personList.xhtml");
+				// context.responseComplete();
+				// }
+			}
+		}
 		// 1. load person passed through session
 		// HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
 		// loaded = (Person) session.getAttribute("person");
 		// 2. load person passed through flash
-		loaded = (Offer) flash.get("offer");
-
+		//loaded = (Offer) flash.get("offer");
+		
 		// cleaning: attribute received => delete it from session
-		if (loaded != null) {
-			this.offer = loaded;
-			// session.removeAttribute("person");
-		} else {
-			ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "B³¹d u¿ycia systemu!", null));
-			// if (!context.isPostback()) { //possible redirect
-			// context.getExternalContext().redirect("personList.xhtml");
-			// context.responseComplete();
-			// }
-		}
+//		if (loaded != null) {
+//			this.offer = loaded;
+//			// session.removeAttribute("person");
+//		} else {
+//			ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "B³¹d u¿ycia systemu!", null));
+//			// if (!context.isPostback()) { //possible redirect
+//			// context.getExternalContext().redirect("personList.xhtml");
+//			// context.responseComplete();
+//			// }
+//		}
 		
 	}
 	

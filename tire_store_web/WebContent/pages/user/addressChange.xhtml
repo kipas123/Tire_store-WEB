@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<!--<f:metadata>
+    <f:viewAction action="#{loginCtrl.isInrole()}" />
+</f:metadata> -->
+<f:metadata>
+	<f:viewAction action="#{accountChangeAdress.onLoad()}" />
+</f:metadata>
+
+
+<ui:composition template="/templates/offerlist-template.xhtml">
+	<ui:define name="topic-name">
+		<span style="color: white;">Opony osobowe</span>
+	</ui:define>
+	<ui:define name="insertContent">
+		<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+			<div class="panel panel-default offerView" style="opacity: 0.9;">
+				<div class="panel-body">
+					<h3 class="thin text-center">Zmień adres:</h3>
+					<hr></hr>
+					<p:panelGrid id="grid" columns="1" layout="flex"
+						columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4"
+						styleClass="customPanelGrid" contentStyleClass="ui-fluid">
+						<h:form>
+							<br></br>
+							<span class="ui-float-label" style=""> <p:inputText
+									id="name" value="#{accountChangeAdress.user.name}"
+									required="true" requiredMessage="Podaj imię!"
+									validatorMessage="Imię nie powinno zawierać znaków specjalnych i cyfr">
+									<f:validateRegex pattern="^([ \u00c0-\u01ffa-zA-Z'\-])+$" />
+								</p:inputText> <p:outputLabel style="text-align: center;" for="name"
+									value="Imię" />
+							</span>
+							<p:message for="name" />
+							<br></br>
+							<br></br>
+							<span class="ui-float-label"> <p:inputText id="surname"
+									value="#{accountChangeAdress.user.surname}" required="true"
+									requiredMessage="Podaj nazwisko!"
+									validatorMessage="Nazwisko nie powinno zawierać znaków specjalnych i cyfr">
+									<f:validateRegex pattern="^([ \u00c0-\u01ffa-zA-Z'\-])+$" />
+								</p:inputText> <p:outputLabel for="surname" value="Nazwisko" />
+							</span>
+							<p:message for="surname" />
+							<br></br>
+							<br></br>
+							<span class="ui-float-label"> <p:inputText id="city"
+									value="#{accountChangeAdress.user.city}" required="true"
+									requiredMessage="Podaj miasto!"
+									validatorMessage="Miasto:Niepoprawne dane! Podaj poprawne dane.">
+									<f:validateLength minimum="3" maximum="20" />
+								</p:inputText> <p:outputLabel for="city" value="Miasto" />
+							</span>
+							<p:message for="city" />
+							<br></br>
+							<br></br>
+							<span class="ui-float-label"> <p:inputText id="street"
+									value="#{accountChangeAdress.user.street}" required="true"
+									requiredMessage="Podaj ulicę!"
+									validatorMessage="Ulica:Niepoprawne dane! Podaj poprawne dane.">
+									<f:validateLength minimum="3" maximum="20" />
+								</p:inputText> <p:outputLabel for="street" value="Ulica" />
+							</span>
+							<p:message for="street" />
+							<br></br>
+							<br></br>
+							<span class="ui-float-label"> <p:inputText
+									id="houseNumber"
+									value="#{accountChangeAdress.user.housenumber}" required="true"
+									requiredMessage="Podaj numer domu!"
+									validatorMessage="Numer domu:Niepoprawne dane! Podaj poprawne dane.">
+									<f:validateLength minimum="1" maximum="20" />
+								</p:inputText> <p:outputLabel for="houseNumber" value="Numer domu" />
+							</span>
+							<p:message for="houseNumber" />
+							<br></br>
+							<br></br>
+							<span class="ui-float-label"> <p:inputText id="zipCode"
+									value="#{accountChangeAdress.user.zipcode}" required="true"
+									requiredMessage="Podaj kod pocztowy!"
+									validatorMessage="Kod pocztowy:Niepoprawne dane! Podaj poprawne dane.">
+									<f:validateLength minimum="3" maximum="20" />
+								</p:inputText> <p:outputLabel for="zipCode" value="Kod pocztowy" />
+							</span>
+							<p:message for="zipCode" />
+							<br></br>
+							<br></br>
+							<span class="ui-float-label"> <p:inputText id="number"
+									value="#{accountChangeAdress.user.phoneNumber}" /> <p:outputLabel
+									for="number" value="Numer telefonu" />
+							</span>
+							<br></br>
+							<br></br>
+							<div style="float: left;">
+									<p:commandButton value="Wróć" id="ajax" update="msg"
+								action="#{offerList.accountPage()}" style="margin-right:20px;"
+								styleClass="ui-priority-primary" />
+							</div>
+							<div style="float: right;">
+							<p:commandButton value="Zmień hasło" id="ajaxs" update="msg"
+								action="#{accountChangeAdress.addressChange()}" style="margin-right:20px;"
+								styleClass="ui-priority-primary" />
+							</div>
+
+						</h:form>
+						<br></br>
+						<p:messages id="msg" />
+					</p:panelGrid>
+
+				</div>
+			</div>
+
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

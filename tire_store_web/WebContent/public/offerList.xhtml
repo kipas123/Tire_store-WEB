@@ -28,8 +28,12 @@
 					<br></br> #{item.shortdescription}
 					<div style="text-align: right; clear: both; margin: 5px 0;">
 						<h:form>
+						<!--<f:metadata>
 							<p:commandButton value="Strona admina"
-								action="#{offerList.offerDetails(item)}" style="margin-bottom:1em;" />
+								action="#{offerList.offerDetails(item)}" style="margin-bottom:1em;" />-->
+								<p:button outcome="offerView" value="Przejdz (GET)">
+					<f:param name="item" value="#{item.idoffer}" />
+				</p:button>
 						</h:form>
 					</div>
 

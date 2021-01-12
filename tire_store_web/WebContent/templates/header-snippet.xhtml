@@ -17,18 +17,22 @@
 			<p:menubar
 				style="float:right;color: white;background: rgba(0,0,0,0.5); font-size:20px; border:none;">
 
-				<p:menuitem style="font-size:18px; background-color: #bfbfbf; color: red !important" value="Home"
+				<p:menuitem style="font-size:18px; background-color: #bfbfbf;" value="Home"
 					action="#{loginCtrl.indexPage()}" ajax="false" />
-				<p:submenu style="font-size:18px; color: red !important;" label="Opony"> 
+				<p:submenu style="font-size:18px;" label="Opony">
 					<p:menuitem value="Opony samochodowe" action="#{offerList.offerlistPage()}" ajax="false" />
 					<p:menuitem value="Opony ciężarowe" url="#" />
 				</p:submenu>
 				<p:menuitem style="font-size:18px; color: red;" value="O nas"
-					action="#{registerCtrl.registerPage()}" ajax="false" />
+					action="#{offerList.accountPage()}" ajax="false" />
+					<p:menuitem style="font-size:18px; color: red !important;" value="Konto"
+					action="#{accountManagement.accountPage()}" ajax="false" rendered="#{accountManagement.islogged()}"/>
 
 				<f:facet name="options">
 					<p:commandButton value="Zaloguj"
-				action="#{loginCtrl.loginPage()}" icon="pi pi-home"  />
+				action="#{loginCtrl.loginPage()}" icon="pi pi-home" rendered="#{!accountManagement.islogged()}" />
+				<p:commandButton value="Wyloguj"
+				action="#{loginCtrl.doLogout()}" icon="pi pi-home" rendered="#{accountManagement.islogged()}" />
 				</f:facet>
 			</p:menubar>
 		</h:form>
