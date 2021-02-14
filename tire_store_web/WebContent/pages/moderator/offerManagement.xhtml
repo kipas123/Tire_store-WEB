@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<!--<f:metadata>
+    <f:viewAction action="#{loginCtrl.isInrole()}" />
+</f:metadata> -->
+<f:metadata>
+	<f:viewAction action="#{offerManagement.onLoad()}" />
+</f:metadata>
+
+
+<ui:composition template="/templates/offerlist-template.xhtml">
+	<ui:define name="topic-name">
+		<span style="color: white;">Zarządzanie ofertą</span>
+	</ui:define>
+	<ui:define name="insertContent">
+		<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+			<div class="panel panel-default offerView" style="opacity: 0.9;">
+				<div class="panel-body">
+					<h3 class="thin text-center">Zmień ofertę:</h3>
+					<hr></hr>
+					<p:panelGrid id="grid" columns="1" layout="flex"
+						columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4"
+						styleClass="customPanelGrid" contentStyleClass="ui-fluid">
+						<h:form>
+							<br></br>
+							<span class="ui-float-label"> <p:inputTextarea
+									id="shortdescription"
+									value="#{offerManagement.offer.shortdescription}"
+									required="true" requiredMessage="Podaj nazwisko!">
+								</p:inputTextarea> <p:outputLabel for="shortdescription" value="Krótki opis" />
+							</span>
+							<p:message for="shortdescription" />
+							<br></br>
+							<br></br>
+							<span class="ui-float-label" style=""> <p:inputTextarea
+									id="description" value="#{offerManagement.offer.description}"
+									required="true" requiredMessage="Podaj imię!">
+								</p:inputTextarea> <p:outputLabel style="text-align: center;" for="description"
+									value="Opis" />
+							</span>
+							<p:message for="description" />
+							<br></br>
+							<br></br>
+							<span class="ui-float-label"> <p:inputText id="quantity"
+									value="#{offerManagement.offer.quantity}" required="true"
+									requiredMessage="Podaj ilość!"
+									validatorMessage="Ilość:Niepoprawne dane! Podaj poprawne dane.">
+									<f:validateLongRange minimum="1" />
+								</p:inputText> <p:outputLabel for="quantity" value="Ilość" />
+							</span>
+							<p:message for="quantity" />
+							<br></br>
+							<br></br>
+							<span class="ui-float-label"> <p:inputText id="price"
+									value="#{offerManagement.offer.price}" required="true"
+									requiredMessage="Podaj cenę!"
+									validatorMessage="Cena:Niepoprawne dane! Podaj poprawne dane.">
+									<f:validateLongRange minimum="1" />
+								</p:inputText> <p:outputLabel for="price" value="Cena" />
+							</span>
+							<p:message for="price" />
+							<br></br>
+							<br></br>
+							<span class="ui-float-label"> <p:inputText id="imghref"
+									value="#{offerManagement.offer.imghref}" required="true"
+									requiredMessage="Podaj adres zdj obrazka">
+								</p:inputText> <p:outputLabel for="imghref" value="Imghref" />
+							</span>
+							<p:message for="imghref" />
+							<br></br>
+							<br></br>
+							<h:form id="selector">
+								<h:selectOneMenu id="selector"
+									value="#{offerManagement.selected}">
+									<f:selectItem itemLabel="Wybierz status" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItem itemValue="1" itemLabel="Aktywne" />
+									<f:selectItem itemValue="0" itemLabel="Nieaktywne" />
+								</h:selectOneMenu>
+								<div style="float: right;">
+									<p>Status:</p>
+									<h:panelGroup class="dotCircle"
+										rendered="#{productManagement.toBollean2(offerManagement.offer.tireproduct)}"></h:panelGroup>
+									<h:panelGroup class="dotCircleOff"
+										rendered="#{!productManagement.toBollean2(offerManagement.offer.tireproduct)}"></h:panelGroup>
+								</div>
+							</h:form>
+							<div style="clear: both;"></div>
+
+							<br></br>
+							<div style="float: right; margin-top: 15px;">
+								<p:commandButton value="Zapisz" id="ajaxs" update="msg"
+									action="#{accountChangeAdress.addressChange()}"
+									style="margin-right:20px;" styleClass="ui-priority-primary"
+									rendered="#{!productManagement.toBollean(offerManagement.offer.tireproduct)}" />
+								<p:commandButton value="Aktualizuj" id="ajaxsx" update="msg"
+									action="#{offerManagement.offerChange()}"
+									style="margin-right:20px;" styleClass="ui-priority-primary"
+									rendered="#{productManagement.toBollean(offerManagement.offer.tireproduct)}" />
+							</div>
+
+						</h:form>
+						<h:form id="secondary">
+							<div style="float: left;">
+								<p:commandButton value="Wróć" id="ajax" ajax="false"
+									action="#{productManagement.productsPage()}"
+									style="margin-right:20px;" styleClass="ui-priority-primary" />
+							</div>
+						</h:form>
+						<br></br>
+						<p:messages id="msg" />
+					</p:panelGrid>
+
+				</div>
+			</div>
+
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

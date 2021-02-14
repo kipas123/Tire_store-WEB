@@ -37,7 +37,7 @@
                     <td>#{offerDetails.offer.price}zł</td>
                 </tr>
                 <tr>
-                    <td><p:inputNumber id="quantity" size="1" decimalPlaces="0" value = "#{offerDetails.quantity}" minValue="1" maxValue="1000">  
+                    <td><p:inputNumber id="quantity" size="1" decimalPlaces="0" value = "#{offerDetails.quantity}" minValue="0" maxValue="1000">  
                    			<p:ajax update="output1" /> 
                 </p:inputNumber></td>
                     <td>Szt.</td>
@@ -51,9 +51,13 @@
             </h:form>
         </table>
     </div>
-            <div class="col-sm-12"><p:commandButton value="Kup teraz" action="#{loginCtrl.loginPage()}"
-				style="opacity:1.0;background-color: orange;margin-bottom:1em; float:right;" />
+    <h:form id="secondary">
+            <div class="col-sm-12" style="float:right;">
+				<p:commandButton value="Kup" id="ajax" ajax="false"
+								action="#{offerDetails.buyProduct(offerDetails.offer)}" style="margin-right:20px;"
+								styleClass="ui-priority-primary" />
 				</div>
+				</h:form>
 				<div style="clear:both;"></div>
     <div class="col-sm-12">
     <p:dataTable value="#{offerDetails.offer}" var="offer">

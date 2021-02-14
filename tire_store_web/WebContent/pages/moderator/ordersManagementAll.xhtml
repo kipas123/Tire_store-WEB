@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<!--<f:metadata>
+    <f:viewAction action="#{loginCtrl.isInrole()}" />
+</f:metadata> -->
+
+<ui:composition template="/templates/offerlist-template.xhtml">
+	<ui:define name="topic-name">
+		<span style="color: white;">Wszystkie zamówienia</span>
+	</ui:define>
+	<ui:define name="insertContent">
+		<div class="card" style="margin-bottom: 200px;">
+<h:form id="form">
+    <div class="card crud-demo">
+        <p:growl id="msg" showDetail="true"/>
+
+
+        <p:dataTable id="dt-products" widgetVar="dtProducts" var="order" value="#{orderCtrl.getOrders()}"
+                     reflow="true" styleClass="products-table"
+                     rowKey="#{order.idorder}" rows="10" paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+					rowsPerPageTemplate="5,10,{ShowAll|'All'}">
+
+
+            <p:column headerText="ID_zam" filterBy="#{order.idorder}">
+                <h:outputText value="#{order.idorder}"/>
+            </p:column>
+            <p:column headerText="Użytkownik" filterBy="#{order.user.login}">
+                <h:outputText value="#{order.user.login}"/>
+            </p:column>
+            <p:column headerText="Data" sortBy="#{order.orderdata}">
+                <h:outputText value="#{order.orderdata}"/>
+            </p:column>
+            <p:column headerText="Status zamówienia" sortBy="#{order.orderstatus.name}">
+                <h:outputText value="#{order.orderstatus.name}"/>
+            </p:column>
+            <p:column headerText="Narzędzia">
+            <p:commandButton value="Edytuj zamówienie" id="views" ajax="false"
+								action="#{orderCtrl.orderModify(order)}" style="float:left;"/><br>/</br>
+               <p:commandButton value="Zobacz zamówienie" id="view" ajax="false"
+								action="#{orderCtrl.orderShow(order)}" style="float:left;" ></p:commandButton>
+            </p:column>
+           </p:dataTable>
+    </div>
+</h:form>
+
+    </div>
+
+
+	</ui:define>
+</ui:composition>
+</html>

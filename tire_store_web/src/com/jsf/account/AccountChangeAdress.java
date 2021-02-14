@@ -82,6 +82,8 @@ public class AccountChangeAdress implements Serializable {
 		try {
 		userDAO.update(this.user);
 		ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Zapisano!", null));
+		ctx.getExternalContext().getFlash().setKeepMessages(true);
+		ctx.getExternalContext().redirect("http://localhost:8080/tire_store/pages/user/account.xhtml");
 		
 		}catch(Exception e) {
 			ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "B³¹d u¿ycia systemu", null));

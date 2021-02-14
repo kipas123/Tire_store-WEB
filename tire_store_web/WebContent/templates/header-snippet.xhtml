@@ -23,10 +23,17 @@
 					<p:menuitem value="Opony samochodowe" action="#{offerList.offerlistPage()}" ajax="false" />
 					<p:menuitem value="Opony ciężarowe" url="#" />
 				</p:submenu>
+				<p:submenu style="font-size:18px;" label="Moderator">
+					<p:menuitem value="Zamówienia do realizacji" action="#{orderCtrl.ordersManagement()}" ajax="false" />
+					<p:menuitem value="Wszystkie zamówienia" action="#{orderCtrl.ordersManagementAll()}" ajax="false" />
+					<p:menuitem value="Zarządzaj produktami/ofertami" action="#{accountOrders.AccountOrdersPage()}" ajax="false" />
+				</p:submenu>
+				<p:submenu style="font-size:18px;" label="Konto" rendered="#{accountManagement.islogged()}">
+					<p:menuitem value="Ustawienia konta" action="#{accountManagement.accountPage()}" ajax="false" />
+					<p:menuitem value="Moje zamówienia" action="#{accountOrders.AccountOrdersPage()}" ajax="false" />
+				</p:submenu>
 				<p:menuitem style="font-size:18px; color: red;" value="O nas"
 					action="#{offerList.accountPage()}" ajax="false" />
-					<p:menuitem style="font-size:18px; color: red !important;" value="Konto"
-					action="#{accountManagement.accountPage()}" ajax="false" rendered="#{accountManagement.islogged()}"/>
 
 				<f:facet name="options">
 					<p:commandButton value="Zaloguj"

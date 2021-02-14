@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<!--<f:metadata>
+    <f:viewAction action="#{loginCtrl.isInrole()}" />
+</f:metadata> -->
+
+<ui:composition template="/templates/offerlist-template.xhtml">
+	<ui:define name="topic-name">
+		<span style="color: white;">Zarządzaj produktami</span>
+	</ui:define>
+	<ui:define name="insertContent">
+		<div class="card" style="margin-bottom: 200px;">
+
+			<h:form id="form">
+				<div class="card crud-demo">
+					<p:growl id="messages" showDetail="true" />
+
+					<div class="products-buttonbar" style="margin-bottom: 10px;">
+						<div>
+							<p:commandButton value="New" icon="pi pi-plus"
+								actionListener="#{crudView.openNew}"
+								update=":form:manage-product-content"
+								oncomplete="PF('manageProductDialog').show()"
+								styleClass="ui-button-success" style="margin-right: .5rem">
+								<p:resetInput target=":form:manage-product-content" />
+							</p:commandButton>
+						</div>
+					</div>
+
+					<p:dataTable id="dt-products" widgetVar="dtProducts" var="product"
+						value="#{productManagement.getAllProducts()}" reflow="true"
+						styleClass="products-table" rowKey="#{order.idorder}" rows="10"
+						paginator="true"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+						rowsPerPageTemplate="5,10,{ShowAll|'All'}">
+
+
+						<p:column headerText="ID_zam" filterBy="#{product.idtire}"
+							sortBy="#{product.idtire}">
+							<h:outputText value="#{product.idtire}" />
+						</p:column>
+						<p:column headerText="Rodzaj_produktu"
+							filterBy="#{product.tiretype.name}">
+							<h:outputText value="#{product.tiretype.name}" />
+						</p:column>
+						<p:column headerText="Firma" filterBy="#{product.brand}">
+							<h:outputText value="#{product.brand}" />
+						</p:column>
+						<p:column headerText="Model" filterBy="#{product.model}">
+							<h:outputText value="#{product.model}" />
+						</p:column>
+						<p:column headerText="Rozmiar" filterBy="#{product.size}">
+							<h:outputText value="#{product.size}" />
+						</p:column>
+						<p:column headerText="Stan oferty" sortBy="#{product.hasOffer}">
+							<h:panelGroup class="dotCircle" rendered="#{productManagement.toBollean2(product)}"></h:panelGroup>
+							<h:panelGroup class="dotCircleOff" rendered="#{!productManagement.toBollean2(product)}"></h:panelGroup>
+						</p:column>
+						<p:column exportable="false" headerText="Narzędzia">
+                <p:commandButton icon="pi pi-pencil" update=":form:manage-product-content"
+                                 oncomplete="PF('manageProductDialog').show()"
+                                 styleClass="edit-button rounded-button ui-button-success" process="@this">
+                    <f:setPropertyActionListener value="#{product}" target="#{crudView.selectedProduct}"/>
+                    <p:resetInput target=":form:manage-product-content"/>
+                </p:commandButton><br>/</br>
+                <p:commandButton value="Zmień ofertę" id="ajax" ajax="false"
+								action="#{productManagement.editOffer(product)}" style="margin-right:20px;"
+								styleClass="ui-priority-primary" rendered="#{productManagement.toBollean(product)}"/>
+								<p:commandButton  value="Stwórz ofertę" id="ajaxRT" ajax="false"
+								action="#{productManagement.editOffer(product)}" style="margin-right:20px; background-color: red;"
+								styleClass="ui-priority-primary" rendered="#{!productManagement.toBollean(product)}"/>
+            </p:column>
+					</p:dataTable>
+
+					<p:dialog header="Product Details" width="450" showEffect="fade"
+						modal="true" widgetVar="manageProductDialog" responsive="true">
+						<p:outputPanel id="manage-product-content" class="ui-fluid">
+							<p:outputPanel rendered="#{not empty crudView.selectedProduct}">
+								<div class="p-field">
+									<p:outputLabel for="name">Name</p:outputLabel>
+									<p:inputText id="name"
+										value="#{crudView.selectedProduct.brand}" required="true" />
+								</div>
+								<div class="p-field">
+									<p:outputLabel for="description">Model</p:outputLabel>
+									<p:inputText id="description"
+										value="#{crudView.selectedProduct.model}" />
+								</div>
+								<div class="p-field">
+									<p:outputLabel for="size">Rozmiar</p:outputLabel>
+									<p:inputText id="size"
+										value="#{crudView.selectedProduct.size}" />
+								</div>
+								<div class="p-field">
+								<p:outputLabel for="selector">Rodzaj opony </p:outputLabel>
+									<h:selectOneMenu id="selector" value="#{crudView.selected}">
+										<f:selectItem itemLabel="Wybierz status" itemValue=""
+											noSelectionOption="true" />
+										<c:forEach items="#{productManagement.getTiretypes()}"
+											var="tiretype">
+											<f:selectItem itemValue="#{tiretype.idtiretype}"
+												itemLabel="#{tiretype.name}" />
+										</c:forEach>
+									</h:selectOneMenu>
+								</div>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<f:facet name="footer">
+							<p:commandButton value="Save" icon="pi pi-check"
+								actionListener="#{crudView.saveProduct}"
+								update="manage-product-content"
+								process="manage-product-content @this" />
+							<p:commandButton value="Cancel" icon="pi pi-times"
+								onclick="PF('manageProductDialog').hide()"
+								class="ui-button-secondary" />
+						</f:facet>
+					</p:dialog>
+
+					<p:confirmDialog widgetVar="deleteProductDialog" showEffect="fade"
+						width="300" message="Delete the product?" header="Confirm"
+						severity="warn">
+						<p:commandButton value="Yes" icon="pi pi-check"
+							actionListener="#{crudView.deleteProduct}" process="@this"
+							oncomplete="PF('deleteProductDialog').hide()" />
+						<p:commandButton value="No" type="button"
+							styleClass="ui-button-secondary" icon="pi pi-times"
+							onclick="PF('deleteProductDialog').hide()" />
+					</p:confirmDialog>
+
+					<p:confirmDialog global="true" showEffect="fade" width="300">
+						<p:commandButton value="Yes" type="button"
+							styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+						<p:commandButton value="No" type="button"
+							styleClass="ui-confirmdialog-no ui-button-secondary"
+							icon="pi pi-times" />
+					</p:confirmDialog>
+				</div>
+			</h:form>
+
+		</div>
+
+
+	</ui:define>
+</ui:composition>
+</html>

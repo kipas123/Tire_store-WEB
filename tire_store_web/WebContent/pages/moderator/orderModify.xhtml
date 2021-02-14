@@ -5,32 +5,29 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
-<!--<f:metadata>
-    <f:viewAction action="#{loginCtrl.isInrole()}" />
-</f:metadata> -->
+
 <f:metadata>
-	<f:viewAction action="#{accountChangeAdress.onLoad()}" />
+	<f:viewAction action="#{orderModify.onLoad()}" />
 </f:metadata>
 
-
-<ui:composition template="/templates/offerlist-template.xhtml">
+<ui:composition template="/templates/login-template.xhtml">
 	<ui:define name="topic-name">
-		<span style="color: white;">Opony osobowe</span>
+		<span style="color: white;">Modyfikuj zamówienie</span>
 	</ui:define>
 	<ui:define name="insertContent">
 		<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-			<div class="panel panel-default offerView" style="opacity: 0.9;">
-				<div class="panel-body">
-					<h3 class="thin text-center">Zmień adres:</h3>
-					<hr></hr>
+			<div class="panel panel-default">
+				<div class="panel-body text-center">
+					<h3>Zamówienie nr. #{orderModify.order.idorder}:</h3>
+
 					<p:panelGrid id="grid" columns="1" layout="flex"
 						columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4"
 						styleClass="customPanelGrid" contentStyleClass="ui-fluid">
-						<h:form>
+						<h:form id="bla">
 							<br></br>
 							<span class="ui-float-label" style=""> <p:inputText
-									id="name" value="#{accountChangeAdress.user.name}"
-									required="true" requiredMessage="Podaj imię!"
+									id="name" value="#{orderModify.order.name}" required="true"
+									requiredMessage="Podaj imię!"
 									validatorMessage="Imię nie powinno zawierać znaków specjalnych i cyfr">
 									<f:validateRegex pattern="^([ \u00c0-\u01ffa-zA-Z'\-])+$" />
 								</p:inputText> <p:outputLabel style="text-align: center;" for="name"
@@ -40,7 +37,7 @@
 							<br></br>
 							<br></br>
 							<span class="ui-float-label"> <p:inputText id="surname"
-									value="#{accountChangeAdress.user.surname}" required="true"
+									value="#{orderModify.order.surname}" required="true"
 									requiredMessage="Podaj nazwisko!"
 									validatorMessage="Nazwisko nie powinno zawierać znaków specjalnych i cyfr">
 									<f:validateRegex pattern="^([ \u00c0-\u01ffa-zA-Z'\-])+$" />
@@ -50,7 +47,7 @@
 							<br></br>
 							<br></br>
 							<span class="ui-float-label"> <p:inputText id="city"
-									value="#{accountChangeAdress.user.city}" required="true"
+									value="#{orderModify.order.city}" required="true"
 									requiredMessage="Podaj miasto!"
 									validatorMessage="Miasto:Niepoprawne dane! Podaj poprawne dane.">
 									<f:validateLength minimum="3" maximum="20" />
@@ -60,7 +57,7 @@
 							<br></br>
 							<br></br>
 							<span class="ui-float-label"> <p:inputText id="street"
-									value="#{accountChangeAdress.user.street}" required="true"
+									value="#{orderModify.order.street}" required="true"
 									requiredMessage="Podaj ulicę!"
 									validatorMessage="Ulica:Niepoprawne dane! Podaj poprawne dane.">
 									<f:validateLength minimum="3" maximum="20" />
@@ -70,9 +67,8 @@
 							<br></br>
 							<br></br>
 							<span class="ui-float-label"> <p:inputText
-									id="houseNumber"
-									value="#{accountChangeAdress.user.housenumber}" required="true"
-									requiredMessage="Podaj numer domu!"
+									id="houseNumber" value="#{orderModify.order.housenumber}"
+									required="true" requiredMessage="Podaj numer domu!"
 									validatorMessage="Numer domu:Niepoprawne dane! Podaj poprawne dane.">
 									<f:validateLength minimum="1" maximum="20" />
 								</p:inputText> <p:outputLabel for="houseNumber" value="Numer domu" />
@@ -81,7 +77,7 @@
 							<br></br>
 							<br></br>
 							<span class="ui-float-label"> <p:inputText id="zipCode"
-									value="#{accountChangeAdress.user.zipcode}" required="true"
+									value="#{orderModify.order.zipcode}" required="true"
 									requiredMessage="Podaj kod pocztowy!"
 									validatorMessage="Kod pocztowy:Niepoprawne dane! Podaj poprawne dane.">
 									<f:validateLength minimum="3" maximum="20" />
@@ -91,33 +87,60 @@
 							<br></br>
 							<br></br>
 							<span class="ui-float-label"> <p:inputText id="number"
-									value="#{accountChangeAdress.user.phoneNumber}" /> <p:outputLabel
-									for="number" value="Numer telefonu" />
+									value="#{orderModify.order.phoneNumber}" /> <p:outputLabel
+									for="number" value="Numer telefonu"/>
 							</span>
 							<br></br>
+							<br></br>
+								<div class="card">
+								<p:dataTable var="product" value="#{orderModify.list}">
+									<p:column headerText="Firma">
+										<h:outputText value="#{product.getTireproduct().brand}" />
+									</p:column>
 
-							<div style="float: right; margin-top: 15px;">
-							<p:commandButton value="Zapisz" id="ajaxs" update="msg"
-								action="#{accountChangeAdress.addressChange()}" style="margin-right:20px;"
-								styleClass="ui-priority-primary" />
+									<p:column headerText="Model">
+										<h:outputText value="#{product.getTireproduct().model}" />
+									</p:column>
+
+									<p:column headerText="Rozmiar">
+										<h:outputText value="#{product.getTireproduct().size}" />
+									</p:column>
+
+									<p:column headerText="Szt.">
+										<h:outputText value="#{orderModify.quantity}" />
+									</p:column>
+									<p:column headerText="Cena za szt.">
+										<h:outputText value="#{product.price}" />
+									</p:column>
+									<p:column headerText="Do zapłaty">
+										<h:outputText value="#{orderModify.order.totalprice}" />
+									</p:column>
+</p:dataTable>				<br></br><br></br><br></br>
+							</div>
+							<div style="float: right;">
+							<p:commandButton value="Zapisz" id="ajaxs" ajax="false"
+									action="#{orderModify.orderModify()}"
+									style="" styleClass="ui-priority-primary" />
+									</div>
+							<div style="float: left;">
+								<p:commandButton value="Wróć" id="ajax" ajax="false"
+									action="#{orderCtrl.ordersManagementAll()}"
+									style="margin-right:20px;" styleClass="ui-priority-primary" />
 							</div>
 
 						</h:form>
-						<h:form id="secondary">
-						<div style="float: left;">
-									<p:commandButton value="Wróć" id="ajax" ajax="false"
-								action="#{offerList.accountPage()}" style="margin-right:20px;"
-								styleClass="ui-priority-primary" />
-							</div>
-							</h:form>
-						<br></br>
+
 						<p:messages id="msg" />
+
+
 					</p:panelGrid>
+
 
 				</div>
 			</div>
-
 		</div>
+
+
 	</ui:define>
 </ui:composition>
 </html>

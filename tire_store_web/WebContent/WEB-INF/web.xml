@@ -43,9 +43,9 @@
 /javax.faces.resource : PUBLIC;
 /public : PUBLIC;
 /pages : admin;
-/pages/calc : user, manager, admin;
+/pages/user : user, moderator, admin;
 /pages/admin : admin;
-/pages/manager : admin, manager;
+/pages/moderator : admin, manager;
 			</param-value>
 		</init-param>
 		<init-param>

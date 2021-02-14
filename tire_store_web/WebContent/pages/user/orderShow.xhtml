@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<f:metadata>
+	<f:viewAction action="#{orderModify.onLoad2()}" />
+</f:metadata>
+
+<ui:composition template="/templates/login-template.xhtml">
+	<ui:define name="topic-name">
+		<span style="color: white;">Zamówienie</span>
+	</ui:define>
+	<ui:define name="insertContent">
+		<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+			<div class="panel panel-default">
+				<div class="panel-body text-center">
+					<h3>Zamówienie nr. #{orderModify.order.idorder}:</h3>
+
+					<p:panelGrid id="grid" columns="1" layout="flex"
+						columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4"
+						styleClass="customPanelGrid" contentStyleClass="ui-fluid">
+						<h:form id="bla">
+							<br></br>
+							<span class="ui-float-label" style=""> <p:inputText
+									id="name" value="#{orderModify.order.name}" required="true"
+									disabled="true">
+								</p:inputText> <p:outputLabel style="text-align: center;" for="name"
+									value="Imię" />
+							</span>
+							<p:message for="name" />
+							<br></br>
+							<br></br>
+							<span class="ui-float-label"> <p:inputText id="surname"
+									value="#{orderModify.order.surname}" disabled="true">
+								</p:inputText> <p:outputLabel for="surname" value="Nazwisko" />
+							</span>
+							<p:message for="surname" />
+							<br></br>
+							<br></br>
+							<span class="ui-float-label"> <p:inputText id="city"
+									value="#{orderModify.order.city}" disabled="true">
+								</p:inputText> <p:outputLabel for="city" value="Miasto" />
+							</span>
+							<p:message for="city" />
+							<br></br>
+							<br></br>
+							<span class="ui-float-label"> <p:inputText id="street"
+									value="#{orderModify.order.street}" disabled="true">
+								</p:inputText> <p:outputLabel for="street" value="Ulica" />
+							</span>
+							<p:message for="street" />
+							<br></br>
+							<br></br>
+							<span class="ui-float-label"> <p:inputText
+									id="houseNumber" value="#{orderModify.order.housenumber}"
+									disabled="true">
+								</p:inputText> <p:outputLabel for="houseNumber" value="Numer domu" />
+							</span>
+							<p:message for="houseNumber" />
+							<br></br>
+							<br></br>
+							<span class="ui-float-label"> <p:inputText id="zipCode"
+									value="#{orderModify.order.zipcode}" disabled="true">
+								</p:inputText> <p:outputLabel for="zipCode" value="Kod pocztowy" />
+							</span>
+							<p:message for="zipCode" />
+							<br></br>
+							<br></br>
+							<span class="ui-float-label"> <p:inputText id="number"
+									disabled="true" value="#{orderModify.order.phoneNumber}" /> <p:outputLabel
+									for="number" value="Numer telefonu" />
+							</span>
+							<br></br>
+							<br></br>
+							<div class="card">
+								<p:dataTable var="product" value="#{orderModify.list}">
+									<p:column headerText="Firma">
+										<h:outputText value="#{product.getTireproduct().brand}" />
+									</p:column>
+
+									<p:column headerText="Model">
+										<h:outputText value="#{product.getTireproduct().model}" />
+									</p:column>
+
+									<p:column headerText="Rozmiar">
+										<h:outputText value="#{product.getTireproduct().size}" />
+									</p:column>
+
+									<p:column headerText="Szt.">
+										<h:outputText value="#{orderModify.quantity}" />
+									</p:column>
+									<p:column headerText="Cena za szt.">
+										<h:outputText value="#{product.price}" />
+									</p:column>
+									<p:column headerText="Do zapłaty">
+										<h:outputText value="#{orderModify.order.totalprice}" />
+									</p:column>
+								</p:dataTable>
+							</div>
+						</h:form>
+
+						<p:messages id="msg" />
+
+
+					</p:panelGrid>
+
+
+				</div>
+			</div>
+		</div>
+
+
+	</ui:define>
+</ui:composition>
+</html>

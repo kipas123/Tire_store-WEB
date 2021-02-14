@@ -108,4 +108,19 @@ public class OfferDetails implements Serializable {
 	public Double sumprice(){
 		return this.quantity*2;
 	}
+	
+	
+	public String buyProduct(Offer offer){
+		//1. Pass object through session
+		//HttpSession session = (HttpSession) extcontext.getSession(true);
+		//session.setAttribute("person", person);
+		
+		//2. Pass object through flash 
+		flash.put("offer", offer);
+		flash.put("quantity", quantity);
+		if(quantity>0) {
+			return "/pages/user/orderSummary?faces-redirect=true";
+		}else return null;
+		
+	}
 }

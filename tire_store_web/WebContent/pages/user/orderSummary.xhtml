@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<!--<f:metadata>
+    <f:viewAction action="#{loginCtrl.isInrole()}" />
+</f:metadata> -->
+
+<f:metadata>
+	<f:viewAction action="#{orderCtrl.onLoad()}" />
+</f:metadata>
+
+
+
+<ui:composition template="/templates/offerlist-template.xhtml">
+	<ui:define name="topic-name">
+		<span style="color: white;">Podsumowanie</span>
+	</ui:define>
+	<ui:define name="insertContent">
+
+		<div class="col-sm-6 offerView" style="text-align: justify; font-size: 20px; border-radius: 10px 0px 10px 10px;">
+
+			<table class="table table-dark">
+				<header style=" font-size: 30px;">Adres do wysyłki:</header>
+				<tbody>
+					<tr>
+						<td>Imie:</td>
+						<td>#{orderCtrl.user.name}</td>
+
+					</tr>
+					<tr>
+						<td>Nazwisko:</td>
+						<td>#{orderCtrl.user.surname}</td>
+					</tr>
+					<tr>
+						<td>Miasto:</td>
+						<td>#{orderCtrl.user.city}</td>
+
+					</tr>
+					<tr>
+						<td>Ulica</td>
+						<td>#{orderCtrl.user.street}</td>
+					</tr>
+					<tr>
+						<td>Numer domu:</td>
+						<td>#{orderCtrl.user.housenumber}</td>
+					</tr>
+					<hr></hr>
+						<tr>
+							<td>Kod pocztowy:</td>
+							<td>#{orderCtrl.user.zipcode}</td>
+						</tr>
+						<tr>
+							<td>Numer telefonu:</td>
+							<td>#{orderCtrl.user.phoneNumber}</td>
+						</tr>
+				</tbody>
+			</table>
+			<div class="text-right"
+				style="clear: both; margin-top: 12px; margin-right: 10px;">
+				<p>
+					Adres możesz zmienić w zakładce konto
+				</p>
+			</div>
+			<hr></hr>
+		</div>
+		<div class="col-sm-6 offerView" style="text-align: justify; font-size: 20px; border-radius: 0px 10px 10px 0px;">
+
+			<table class="table table-dark">
+				<header style=" font-size: 30px;">
+				<img src="{$conf->app_url}/assets/images/{$formOffer->imghref}"
+					class="img-fluid" alt="Responsive image" height="100px"
+					width='100px'></img></header>
+				<tbody>
+					<tr>
+						<td>Firma:</td>
+						<td>#{orderCtrl.offer.getTireproduct().brand}</td>
+
+					</tr>
+					<tr>
+						<td>Model:</td>
+						<td>#{orderCtrl.offer.getTireproduct().model}</td>
+					</tr>
+					<tr>
+						<td>Rozmiar:</td>
+						<td>#{orderCtrl.offer.getTireproduct().size}</td>
+
+					</tr>
+					<tr>
+						<td><span style='color: red;'> szt.</span></td>
+						<td>#{orderCtrl.quantity}</td>
+					</tr>
+					<tr>
+						<td>cena za sztukę:</td>
+						<td>#{orderCtrl.offer.price}</td>
+					</tr>
+					<hr></hr>
+				</tbody>
+			</table>
+			<div style="margin-top: 50px; clear: both">
+					<div style="float: right;">
+						<span
+							style="margin-right: 10px; font-size: 20px; color: #ff3333; font-weight: 800">Razem:
+							#{orderCtrl.totalPrice}zł</span>
+							<h:form>
+						<p:commandButton value="Kup" id="ajax" ajax="false"
+								action="#{orderCtrl.buyProduct()}" style="margin-right:20px;"
+								styleClass="ui-priority-primary" />
+								</h:form>
+						<br></br><br></br>
+					</div>
+			</div>
+		</div>
+
+
+	</ui:define>
+</ui:composition>
+</html>

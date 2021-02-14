@@ -508,4 +508,20 @@ img.pull-left { margin-right: 10px; }
 	opacity: 0.9; 
 	border-radius: 10px; 
 	margin-bottom: 30px;
+	
+}
+.dotCircle {
+  height: 25px;
+  width: 25px;
+  background-color: green;
+  border-radius: 50%;
+  display: inline-block;
+  text-align: center !important;
+}
+.dotCircleOff{
+	height: 25px;
+  width: 25px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
 }
