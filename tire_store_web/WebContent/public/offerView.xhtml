@@ -14,7 +14,7 @@
 </f:metadata>
 -->
 <f:metadata>
-	<f:viewParam name="item" value="#{offerDetails.offer.idoffer}"
+	<f:viewParam name="item" value="#{offerDetails.tireproduct.idtire}"
 		converterMessage="Nieoczekiwany błąd"/>
 	<f:event type="preRenderView" listener="#{offerDetails.onLoad()}" />
 </f:metadata>
@@ -27,23 +27,23 @@
 
     <div class="col-sm-12 col-md-6 col-md-offset-3 offerView" >
     <div class="col-sm-6" style="opacity: 1; !important"><img src="#{resource['template:assets/images/tire.png']}" class="img-fluid" alt="Responsive image"></img></div>
-    <div class="col-sm-6 "><p style="font-size: 30px; padding:10px; margin-right: 10px;">#{offerDetails.offer.getTireproduct().brand} #{offerDetails.offer.getTireproduct().model} #{offerDetails.offer.getTireproduct().size}</p>
+    <div class="col-sm-6 "><p style="font-size: 30px; padding:10px; margin-right: 10px;">#{offerDetails.tireproduct.brand} #{offerDetails.tireproduct.model} #{offerDetails.tireproduct.size}</p>
     
     <table class="table table-dark">
     <h:form>
             <tbody>
                 <tr>
-                    <td>Cena szt.</td>
-                    <td>#{offerDetails.offer.price}zł</td>
+                    <td>Price/pcs.</td>
+                    <td>#{offerDetails.tireproduct.price}zł</td>
                 </tr>
                 <tr>
-                    <td><p:inputNumber id="quantity" size="1" decimalPlaces="0" value = "#{offerDetails.quantity}" minValue="0" maxValue="1000">  
+                    <td><p:inputNumber id="quantity" size="1" decimalPlaces="0" value = "#{offerDetails.quantity}" minValue="0" maxValue="#{offerDetails.tireproduct.quantity}">  
                    			<p:ajax update="output1" /> 
                 </p:inputNumber></td>
-                    <td>Szt.</td>
+                    <td>pcs./#{offerDetails.tireproduct.quantity}</td>
                 </tr>
                 <tr>
-                    <td>Do zapłaty:</td>
+                    <td>To be paid:</td>
                     <td><p:inputText id="output1" size="8" disabled="true" value="#{offerDetails.quantity != null ?
             offerDetails.sumprice() : '2.0'}"/> </td>
                 </tr>
@@ -53,37 +53,39 @@
     </div>
     <h:form id="secondary">
             <div class="col-sm-12" style="float:right;">
-				<p:commandButton value="Kup" id="ajax" ajax="false"
-								action="#{offerDetails.buyProduct(offerDetails.offer)}" style="margin-right:20px;"
-								styleClass="ui-priority-primary" />
+				<p:commandButton value="Buy" id="ajax" ajax="false"
+								action="#{offerDetails.buyProduct(offerDetails.tireproduct)}" style="margin-right:20px;"
+								styleClass="ui-priority-primary" rendered="#{offerDetails.hasQuantity()}"/>
+								<h:panelGroup
+										rendered="#{!offerDetails.hasQuantity()}">No product</h:panelGroup>
 				</div>
 				</h:form>
 				<div style="clear:both;"></div>
     <div class="col-sm-12">
-    <p:dataTable value="#{offerDetails.offer}" var="offer">
+    <p:dataTable value="#{offerDetails.tireproduct}" var="tireproduct">
     <p:column headerText="Marka">
-        <h:outputText value="#{offer.getTireproduct().brand}" />
+        <h:outputText value="#{tireproduct.brand}" />
     </p:column>
  
     <p:column headerText="Model">
-        <h:outputText value="#{offer.getTireproduct().model}" />
+        <h:outputText value="#{tireproduct.model}" />
     </p:column>
  
-    <p:column headerText="Rodzaj opony">
-        <h:outputText value="#{offer.getTireproduct().getTiretype().name}" />
+    <p:column headerText="Type">
+        <h:outputText value="#{tireproduct.tiretype.name}" />
     </p:column>
- <p:column headerText="Wielkość">
-        <h:outputText value="#{offer.getTireproduct().size}" />
+ <p:column headerText="Size">
+        <h:outputText value="#{tireproduct.size}" />
     </p:column>
-    <p:column headerText="Magazyn">
-        <h:outputText value="#{offer.quantity}" />
+    <p:column headerText="Magazine">
+        <h:outputText value="#{tireproduct.quantity}" />
     </p:column>
-    <p:column headerText="Cena">
-        <h:outputText value="#{offer.price}" />
+    <p:column headerText="Price">
+        <h:outputText value="#{tireproduct.price}" />
     </p:column>
 </p:dataTable>
 <br></br>
-<p>#{offerDetails.offer.description}
+<p>#{offerDetails.tireproduct.description}
 </p>
 
 </div>

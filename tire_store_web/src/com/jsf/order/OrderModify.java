@@ -3,8 +3,6 @@ package com.jsf.order;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.faces.application.FacesMessage;
@@ -15,21 +13,18 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import tire_store.dao.StoreorderDAO;
+import tire_store.dao.TireproductDAO;
 import tire_store.dao.TireproductHasOrderDAO;
-import tire_store.dao.OfferDAO;
-import tire_store.dao.OrderStatusDAO;
-import tire_store.entities.Offer;
 import tire_store.entities.Storeorder;
 import tire_store.entities.Tireproduct;
 import tire_store.entities.User;
-
 
 @Named
 @ViewScoped
 public class OrderModify implements Serializable {
 	@Inject
 	FacesContext ctx;
-	private static final String PAGE_ORDERMODIFY = "/pages/moderator/orderModify?faces-redirect=true";
+	private static final String PAGE_ORDERMODIFY = "/pages/moderator/orderModify";
 	@Inject
 	Flash flash;
 	private Storeorder order;
@@ -37,6 +32,7 @@ public class OrderModify implements Serializable {
 	private Storeorder loadedOrder;
 	private User loaded_user;
 	private int quantity;
+
 	public int getQuantity() {
 		return quantity;
 	}
@@ -64,78 +60,78 @@ public class OrderModify implements Serializable {
 	@EJB
 	StoreorderDAO orderDAO;
 	@EJB
-	OfferDAO offerDAO;
-	@EJB
 	TireproductHasOrderDAO tireproductHasOrder;
+	@EJB
+	TireproductDAO tireproductDAO;
+
 	public String orderModifyPage() {
 		return PAGE_ORDERMODIFY;
 	}
-	
+
 	public void onLoad() throws IOException {
 		if (!ctx.isPostback()) {
-		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-		this.loaded =(Storeorder) flash.get("storeorder");
-		// cleaning: attribute received => delete it from session
-		if (loaded != null ) {
-			this.order = loaded;
-			// session.removeAttribute("person");
-		} else {
-			ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "B³¹d u¿ycia systemu!", null));
-			ctx.getExternalContext().redirect("http://localhost:8080/tire_store/public/offerList.xhtml");
-			// if (!context.isPostback()) { //possible redirect
-			// context.getExternalContext().redirect("personList.xhtml");
-			// context.responseComplete();
-			// }
-		}
+			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+			this.loaded = (Storeorder) flash.get("storeorder");
+			// cleaning: attribute received => delete it from session
+			if (loaded != null) {
+				this.order = loaded;
+				// session.removeAttribute("person");
+			} else {
+				ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "System usage error!", null));
+				ctx.getExternalContext().redirect("http://localhost:8080/tire_store/public/offerList.xhtml");
+				// if (!context.isPostback()) { //possible redirect
+				// context.getExternalContext().redirect("personList.xhtml");
+				// context.responseComplete();
+				// }
+			}
 		}
 	}
-	
-	
+
 	public void onLoad2() throws IOException {
 		if (!ctx.isPostback()) {
-		this.loadedOrder =(Storeorder) flash.get("storeorder2");
-		// cleaning: attribute received => delete it from session
-		if (this.loadedOrder != null ) {
-			this.order = loadedOrder;
-			// session.removeAttribute("person");
-		} else {
-			ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "B³¹d u¿ycia systemu!", null));
-			ctx.getExternalContext().redirect("http://localhost:8080/tire_store/public/offerList.xhtml");
-			// if (!context.isPostback()) { //possible redirect
-			// context.getExternalContext().redirect("personList.xhtml");
-			// context.responseComplete();
-			// }
-		}
+			this.loadedOrder = (Storeorder) flash.get("storeorder2");
+			// cleaning: attribute received => delete it from session
+			if (this.loadedOrder != null) {
+				this.order = loadedOrder;
+				// session.removeAttribute("person");
+			} else {
+				ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "System usage error!", null));
+				ctx.getExternalContext().redirect("http://localhost:8080/tire_store/public/offerList.xhtml");
+				// if (!context.isPostback()) { //possible redirect
+				// context.getExternalContext().redirect("personList.xhtml");
+				// context.responseComplete();
+				// }
+			}
 		}
 	}
-	
-	
-	
-	
-	
-	public Offer getList(){
-		Tireproduct tr;
-		this.quantity = tireproductHasOrder.getUserOrdersProducts(this.order).get(0).getQuantity();
-		tr = (Tireproduct)tireproductHasOrder.getUserOrdersProducts(this.order).get(0).getTireproduct();
-		
-		return offerDAO.get(tr);
+
+	public Tireproduct getList() throws IOException {
+		Tireproduct tr = null;
+		try {
+			this.quantity = tireproductHasOrder.getUserOrdersProducts(this.order).get(0).getQuantity();
+			tr = (Tireproduct) tireproductHasOrder.getUserOrdersProducts(this.order).get(0).getTireproduct();
+		} catch (Exception e) {
+
+			ctx.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "System usage error" + e.toString(), null));
+			ctx.getExternalContext().getFlash().setKeepMessages(true);
+			ctx.getExternalContext().redirect("index.xhtml");
+		}
+
+		return tr;
 	}
+
 	public void orderModify() throws IOException {
 		Date data = new Date();
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-		loaded_user = (User)RemoteClient.load(session).getDetails(); //if nie ma sesji
+		loaded_user = (User) RemoteClient.load(session).getDetails(); // if nie ma sesji
 		this.order.setLastmodifiedDate(data);
 		this.order.setLastmodifiedBy(loaded_user.getLogin());
 		orderDAO.update(this.order);
-		ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Pomyœlnie zmodyfikowano!", null));
+		ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Successfully modified!", null));
 		ctx.getExternalContext().getFlash().setKeepMessages(true);
 		ctx.getExternalContext().redirect("ordersManagementAll.xhtml");
-		
-		
+
 	}
-	
-	
-	
-	
+
 }
- 

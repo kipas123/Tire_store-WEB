@@ -12,13 +12,13 @@
 
 <ui:composition template="/templates/login-template.xhtml">
 	<ui:define name="topic-name">
-		<span style="color: white;">Modyfikuj zamówienie</span>
+		<span style="color: white;">Modify your order</span>
 	</ui:define>
 	<ui:define name="insertContent">
 		<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 			<div class="panel panel-default">
 				<div class="panel-body text-center">
-					<h3>Zamówienie nr. #{orderModify.order.idorder}:</h3>
+					<h3>Order no. #{orderModify.order.idorder}:</h3>
 
 					<p:panelGrid id="grid" columns="1" layout="flex"
 						columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4"
@@ -31,7 +31,7 @@
 									validatorMessage="Imię nie powinno zawierać znaków specjalnych i cyfr">
 									<f:validateRegex pattern="^([ \u00c0-\u01ffa-zA-Z'\-])+$" />
 								</p:inputText> <p:outputLabel style="text-align: center;" for="name"
-									value="Imię" />
+									value="Name" />
 							</span>
 							<p:message for="name" />
 							<br></br>
@@ -41,7 +41,7 @@
 									requiredMessage="Podaj nazwisko!"
 									validatorMessage="Nazwisko nie powinno zawierać znaków specjalnych i cyfr">
 									<f:validateRegex pattern="^([ \u00c0-\u01ffa-zA-Z'\-])+$" />
-								</p:inputText> <p:outputLabel for="surname" value="Nazwisko" />
+								</p:inputText> <p:outputLabel for="surname" value="Surname" />
 							</span>
 							<p:message for="surname" />
 							<br></br>
@@ -51,7 +51,7 @@
 									requiredMessage="Podaj miasto!"
 									validatorMessage="Miasto:Niepoprawne dane! Podaj poprawne dane.">
 									<f:validateLength minimum="3" maximum="20" />
-								</p:inputText> <p:outputLabel for="city" value="Miasto" />
+								</p:inputText> <p:outputLabel for="city" value="City" />
 							</span>
 							<p:message for="city" />
 							<br></br>
@@ -61,7 +61,7 @@
 									requiredMessage="Podaj ulicę!"
 									validatorMessage="Ulica:Niepoprawne dane! Podaj poprawne dane.">
 									<f:validateLength minimum="3" maximum="20" />
-								</p:inputText> <p:outputLabel for="street" value="Ulica" />
+								</p:inputText> <p:outputLabel for="street" value="Street" />
 							</span>
 							<p:message for="street" />
 							<br></br>
@@ -71,7 +71,7 @@
 									required="true" requiredMessage="Podaj numer domu!"
 									validatorMessage="Numer domu:Niepoprawne dane! Podaj poprawne dane.">
 									<f:validateLength minimum="1" maximum="20" />
-								</p:inputText> <p:outputLabel for="houseNumber" value="Numer domu" />
+								</p:inputText> <p:outputLabel for="houseNumber" value="House number" />
 							</span>
 							<p:message for="houseNumber" />
 							<br></br>
@@ -81,49 +81,49 @@
 									requiredMessage="Podaj kod pocztowy!"
 									validatorMessage="Kod pocztowy:Niepoprawne dane! Podaj poprawne dane.">
 									<f:validateLength minimum="3" maximum="20" />
-								</p:inputText> <p:outputLabel for="zipCode" value="Kod pocztowy" />
+								</p:inputText> <p:outputLabel for="zipCode" value="ZipCode" />
 							</span>
 							<p:message for="zipCode" />
 							<br></br>
 							<br></br>
 							<span class="ui-float-label"> <p:inputText id="number"
 									value="#{orderModify.order.phoneNumber}" /> <p:outputLabel
-									for="number" value="Numer telefonu"/>
+									for="number" value="Phone number"/>
 							</span>
 							<br></br>
 							<br></br>
 								<div class="card">
 								<p:dataTable var="product" value="#{orderModify.list}">
-									<p:column headerText="Firma">
-										<h:outputText value="#{product.getTireproduct().brand}" />
+									<p:column headerText="Company">
+										<h:outputText value="#{product.brand}" />
 									</p:column>
 
 									<p:column headerText="Model">
-										<h:outputText value="#{product.getTireproduct().model}" />
+										<h:outputText value="#{product.model}" />
 									</p:column>
 
-									<p:column headerText="Rozmiar">
-										<h:outputText value="#{product.getTireproduct().size}" />
+									<p:column headerText="Size">
+										<h:outputText value="#{product.size}" />
 									</p:column>
 
-									<p:column headerText="Szt.">
+									<p:column headerText="Pcs.">
 										<h:outputText value="#{orderModify.quantity}" />
 									</p:column>
-									<p:column headerText="Cena za szt.">
+									<p:column headerText="Price per piece">
 										<h:outputText value="#{product.price}" />
 									</p:column>
-									<p:column headerText="Do zapłaty">
+									<p:column headerText="To be paid">
 										<h:outputText value="#{orderModify.order.totalprice}" />
 									</p:column>
 </p:dataTable>				<br></br><br></br><br></br>
 							</div>
 							<div style="float: right;">
-							<p:commandButton value="Zapisz" id="ajaxs" ajax="false"
+							<p:commandButton value="Save" id="ajaxs" ajax="false"
 									action="#{orderModify.orderModify()}"
 									style="" styleClass="ui-priority-primary" />
 									</div>
 							<div style="float: left;">
-								<p:commandButton value="Wróć" id="ajax" ajax="false"
+								<p:commandButton value="Back" id="ajax" ajax="false"
 									action="#{orderCtrl.ordersManagementAll()}"
 									style="margin-right:20px;" styleClass="ui-priority-primary" />
 							</div>

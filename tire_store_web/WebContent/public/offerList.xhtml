@@ -4,47 +4,86 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 <!--<f:metadata>
     <f:viewAction action="#{loginCtrl.isInrole()}" />
 </f:metadata> -->
+<f:metadata>
+	<f:viewParam name="type" value="#{offerList.tiretype}"
+		converterMessage="Nieoczekiwany błąd" />
+	<f:viewParam name="page" value="#{offerList.page}"
+		converterMessage="Nieoczekiwany błąd" />
+	<f:viewParam name="search" value="#{offerList.search}"
+		converterMessage="Nieoczekiwany błąd" />
+
+	<f:event type="preRenderView" listener="#{offerList.onLoad()}" />
+</f:metadata>
 
 <ui:composition template="/templates/offerlist-template.xhtml">
 	<ui:define name="topic-name">
-		<span style="color: white;">Opony osobowe</span>
+		<span style="color: white;">Tires for car</span>
 	</ui:define>
 	<ui:define name="insertContent">
+		<h:form id="bb">
+			<span class="ui-float-label" style=""> <p:inputText
+					id="searchx" value="#{offerList.search}" required="true"
+					requiredMessage="Podaj id zamówienia!"
+					validatorMessage="Nazwa użytkownika nie może zawierać znaków specjalnych, a jego długośc musi mieścić się w zakresie 3-12">
+				</p:inputText> <p:outputLabel style="text-align: center;" for="searchx"
+					value="Company/model/size" />
+			</span>
 
-		<ui:repeat value="#{offerList.list}" var="item">
-			<div class="col-12 col-sm-12 offer"
-				style="background-color: white; border: medium solid black;">
-				<div class="col-sm-3 imgPlace">
-					<img src="#{resource['template:assets/images/tire.png']}"
-						class="img-fluid" alt="Responsive image" height="150px"></img>
-				</div>
-				<div class="col-sm-8 offerText">
-					<p style="font-size: 20px;">#{item.getTireproduct().brand}
-						#{item.getTireproduct().model}</p>
-					<br></br> #{item.shortdescription}
-					<div style="text-align: right; clear: both; margin: 5px 0;">
-						<h:form>
-						<!--<f:metadata>
+			<p:commandButton value="Search for a tire" ajax="false"
+				style="margin-right:20px; float:left;" update="test" />
+		</h:form>
+		<h:form id="test">
+			<ui:repeat value="#{offerList.getActiveProducts()}" var="item">
+				<div class="col-12 col-sm-12 offer"
+					style="background-color: white; border: medium solid black;">
+					<div class="col-sm-3 imgPlace">
+						<img src="#{resource['template:assets/images/tire.png']}"
+							class="img-fluid" alt="Responsive image" height="150px"></img>
+					</div>
+					<div class="col-sm-8 offerText">
+						<p style="font-size: 20px;">#{item.brand} #{item.model}</p>
+						<br></br> #{item.shortdescription}
+						<div style="text-align: right; clear: both; margin: 5px 0;">
+							<h:form>
+								<!--<f:metadata>
 							<p:commandButton value="Strona admina"
 								action="#{offerList.offerDetails(item)}" style="margin-bottom:1em;" />-->
-								<p:button outcome="offerView" value="Przejdz (GET)">
-					<f:param name="item" value="#{item.idoffer}" />
-				</p:button>
-						</h:form>
+								<p:button outcome="offerView" value="Go to offer">
+									<f:param name="item" value="#{item.idtire}" />
+								</p:button>
+							</h:form>
+						</div>
+
 					</div>
-
+					<div class="offerInfo">Brand:#{item.brand}
+						Model:#{item.model} Size:#{item.size} Price:#{item.price}zł</div>
 				</div>
-				<div class="offerInfo">Brand:#{item.getTireproduct().brand}
-					Model:#{item.getTireproduct().model}
-					Size:#{item.getTireproduct().size} Price:#{item.price}zł</div>
+			</ui:repeat>
+			<div style="float: left; padding: 15px;">
+				<p:button outcome="offerList" value="Poprzednia"
+					rendered="#{offerList.isFirst()}">
+					<f:param name="type" value="car" />
+					<f:param name="page" value="#{offerList.page-1}" />
+					<f:param name="search" value="#{offerList.search}" />
+				</p:button>
 			</div>
-		</ui:repeat>
-
-
+			<div>
+				<p style="text-align: center; font-size: 30px; color: white;">#{offerList.pager}/#{offerList.lastPage}</p>
+			</div>
+			<div style="float: right; padding: 15px;">
+				<p:button outcome="offerList" value="Następna"
+					rendered="#{offerList.isLast()}">
+					<f:param name="type" value="car" />
+					<f:param name="page" value="#{offerList.pager}" />
+					<f:param name="search" value="#{offerList.search}" />
+				</p:button>
+			</div>
+		</h:form>
 	</ui:define>
 </ui:composition>
 </html>

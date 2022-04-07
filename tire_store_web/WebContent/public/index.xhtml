@@ -7,7 +7,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title><ui:insert name="title">Kalkulator</ui:insert></title>
+	<title><ui:insert name="title">Tire_store</ui:insert></title>
 	<h:outputStylesheet name="assets/css/main.css" library="template" />
 	<link rel="stylesheet" media="screen"
 		href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700" />
@@ -28,41 +28,70 @@
 		<div class="container-full2">
 			<div class="navbar-header">
 				<!-- Button for smallest screens -->
-				<a class="navbar-brand" href="http://localhost:8080/tire_store/"><img
-					src="#{resource['template:assets/images/logo.png']}" height="150%"
-					alt="Progressus HTML5 template"></img></a>
+<a class="navbar-brand" href="http://localhost:8080/tire_store/">Tire_store</a>
 			</div>
 			<br></br>
 					<h:form>
-			<p:menubar
-				style="float:right;color: white;background: rgba(0,0,0,0.5); font-size:20px; border:none;">
+				<p:menubar
+					style="float:right;color: white;background: rgba(0,0,0,0.5); font-size:20px; border:none;">
 
-				<p:menuitem style="font-size:18px; background-color: #bfbfbf;" value="Home"
-					action="#{loginCtrl.indexPage()}" ajax="false" />
-				<p:submenu style="font-size:18px;" label="Opony">
-					<p:menuitem value="Opony samochodowe" action="#{offerList.offerlistPage()}" ajax="false" />
-					<p:menuitem value="Opony ciężarowe" url="#" />
-				</p:submenu>
-				<p:submenu style="font-size:18px;" label="Moderator">
-					<p:menuitem value="Zamówienia do realizacji" action="#{orderCtrl.ordersManagement()}" ajax="false" />
-					<p:menuitem value="Wszystkie zamówienia" action="#{orderCtrl.ordersManagementAll()}" ajax="false" />
-					<p:menuitem value="Zarządzaj produktami/ofertami" action="#{productManagement.productsPage()}" ajax="false" />
-				</p:submenu>
-				<p:submenu style="font-size:18px;" label="Konto" rendered="#{accountManagement.islogged()}">
-					<p:menuitem value="Ustawienia konta" action="#{accountManagement.accountPage()}" ajax="false" />
-					<p:menuitem value="Moje zamówienia" action="#{accountOrders.AccountOrdersPage()}" ajax="false" />
-				</p:submenu>
-				<p:menuitem style="font-size:18px; color: red;" value="O nas"
-					action="#{offerList.accountPage()}" ajax="false" />
+					<p:menuitem style="font-size:18px; background-color: #bfbfbf;"
+						value="Home" action="#{loginCtrl.indexPage()}" ajax="false" />
+					<p:submenu style="font-size:18px;" label="Tires">
+						<p:menuitem value="By car" outcome="offerList"
+							ajax="false">
+							<f:param name="type" value="car" />
+							<f:param name="page" value="0" />
+						</p:menuitem>
+						<p:menuitem value="By truck" outcome="offerList"
+							ajax="false">
+							<f:param name="type" value="truck" />
+							<f:param name="page" value="0" />
+						</p:menuitem>
+					</p:submenu>
+									<p:submenu style="font-size:18px;" label="Moderator"
+						rendered="#{remoteClient.isInRole('moderator')}">
+						<p:menuitem value="Orders to be executed"
+							action="#{orderCtrl.ordersManagement()}" ajax="false" />
+						<p:menuitem value="All orders"
+							action="#{orderCtrl.ordersManagementAll()}" ajax="false" />
+						<p:menuitem value="Manage products/offers"
+							action="#{productManagement.productsPage()}" ajax="false" />
+					</p:submenu>
+					<p:submenu style="font-size:18px;" label="Moderator"
+						rendered="#{remoteClient.isInRole('admin')}">
+						<p:menuitem value="Orders to be executed"
+							action="#{orderCtrl.ordersManagement()}" ajax="false" />
+						<p:menuitem value="All orders"
+							action="#{orderCtrl.ordersManagementAll()}" ajax="false" />
+						<p:menuitem value="Manage products/offers"
+							action="#{productManagement.productsPage()}" ajax="false" />
+					</p:submenu>
+					<p:submenu style="font-size:18px;" label="Admin"
+						rendered="#{remoteClient.isInRole('admin')}">
+						<p:menuitem value="Administration panel"
+							action="#{adminCtrl.AdminPage()}" ajax="false" />
+						<p:menuitem value="Archived products"
+							action="#{adminCtrl.ArchiviedPage()}" ajax="false" />
+					</p:submenu>
+					<p:submenu style="font-size:18px;" label="Account"
+						rendered="#{accountManagement.islogged()}">
+						<p:menuitem value="Account settings"
+							action="#{accountManagement.accountPage()}" ajax="false" />
+						<p:menuitem value="My orders"
+							action="#{accountOrders.AccountOrdersPage()}" ajax="false" />
+					</p:submenu>
+					<p:menuitem style="font-size:18px; color: red;" value="About us"
+						action="#{offerList.accountPage()}" ajax="false" />
 
-				<f:facet name="options">
-					<p:commandButton value="Zaloguj"
-				action="#{loginCtrl.loginPage()}" icon="pi pi-home" rendered="#{!accountManagement.islogged()}" />
-				<p:commandButton value="Wyloguj"
-				action="#{loginCtrl.doLogout()}" icon="pi pi-home" rendered="#{accountManagement.islogged()}" />
-				</f:facet>
-			</p:menubar>
-		</h:form>
+					<f:facet name="options">
+						<p:commandButton value="Log in" action="#{loginCtrl.loginPage()}"
+							icon="pi pi-home" rendered="#{!accountManagement.islogged()}" />
+						<p:commandButton value="Log out" action="#{loginCtrl.doLogout()}"
+							icon="pi pi-home" rendered="#{accountManagement.islogged()}" />
+					</f:facet>
+				</p:menubar>
+			</h:form>
 
 		</div>
 
@@ -71,16 +100,19 @@
 	<section id="welcome" class="clearfix"> <section
 		class="startPage clearfix">
 	<div class="hello">
-		<h1>PROGRESSUS</h1>
-		<h3>LEADER IN THE AUTOMOTIVE MARKET</h3>
+	<h:form>
+					<p:growl id="msg" showDetail="true" />
+					</h:form>
+		<h1>TIRE STORE</h1>
+
 	</div>
 	<div class="offers clearfix">
-		<a href=""><div
+		<a href="http://localhost:8080/tire_store/public/offerList.xhtml?type=car&amp;page=0"><div
 				class="offer">
-				<p>OPONY OSOBOWE</p>
-			</div></a> <a href=""><div
+				<p>BY CAR</p>
+			</div></a> <a href="http://localhost:8080/tire_store/public/offerList.xhtml?type=truck&amp;page=0"><div
 				class="offer">
-				<p>OPONY CIĘŻAROWE</p>
+				<p>BY TRUCK</p>
 			</div></a> <a href=""><div
 				class="offer">
 				<p>ABOUT US</p>

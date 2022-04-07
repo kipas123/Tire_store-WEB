@@ -21,7 +21,7 @@ public class LoginCtrl {
 
 	@EJB
 	UserDAO userDAO;
-	private static final String PAGE_LOGIN_EDIT = "loginView?faces-redirect=true";
+	private static final String PAGE_LOGIN_EDIT = "loginView";
 	private static final String PAGE_ADMIN_EDIT = "/pages/admin/index?faces-redirect=true";
 	private static final String PAGE_INDEX_EDIT = "/public/index";
 	private User user = new User();
@@ -33,14 +33,17 @@ public class LoginCtrl {
 
 	public String loginPage() {
 		HttpSession session = (HttpSession) ctx.getExternalContext().getSession(true);
-		if(RemoteClient.load(session)==null) return PAGE_LOGIN_EDIT;
-		else return PAGE_INDEX_EDIT;
+		if (RemoteClient.load(session) == null)
+			return PAGE_LOGIN_EDIT;
+		else
+			return PAGE_INDEX_EDIT;
 
 	}
 
 	public String adminPage() {
 		return PAGE_ADMIN_EDIT;
 	}
+
 	public String figlerPage() {
 		return "/public/figler";
 	}
@@ -50,9 +53,14 @@ public class LoginCtrl {
 	}
 
 	public String login() {
-		userLogin = userDAO.getloginAccount(user.getLogin(), user.getPassword());
+		PasswordAuthentication pa = new PasswordAuthentication();
+		userLogin = userDAO.getbyUsername(user.getLogin());
 		// 1.Search user in DB
-		if (this.userLogin != null) {
+		if(this.userLogin==null) {
+			ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Incorrect login or password", null));
+			return null;
+		}
+		if (pa.authenticate(user.getPassword().toCharArray(), userLogin.getPassword())) {
 
 			// 2. if logged in: get User roles, save in RemoteClient and store it in session
 
@@ -68,11 +76,11 @@ public class LoginCtrl {
 			// store RemoteClient with request info in session (needed for SecurityFilter)
 			HttpServletRequest request = (HttpServletRequest) ctx.getExternalContext().getRequest();
 			client.store(request);
-			ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Zalogowano", null));
+			ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Logged in", null));
 			return PAGE_INDEX_EDIT;
 			// and enter the system (now SecurityFilter will pass the request)
 		} else {
-			ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Niepoprawny login lub has³o", null));
+			ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Incorrect login or password", null));
 			return null;
 		}
 	}
@@ -90,7 +98,7 @@ public class LoginCtrl {
 		// - all objects within session will be destroyed
 		// - new session will be created (with new ID)
 		session.invalidate();
-		ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Wylogowano!", null));
+		ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Logged out!", null));
 		return PAGE_INDEX_EDIT;
 	}
 

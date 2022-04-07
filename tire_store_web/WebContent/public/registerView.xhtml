@@ -7,12 +7,12 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <ui:composition template="/templates/login-template.xhtml">
-	<ui:define name="topic-name"><span style="color:white;">Rejestracja</span></ui:define>
+	<ui:define name="topic-name"><span style="color:white;">Register</span></ui:define>
 	<ui:define name="insertContent">
 		<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 			<div class="panel panel-default">
 				<div class="panel-body text-center">
-					<h3>Rejestracja</h3>
+					<h3>Register</h3>
 
 					<p:panelGrid id="grid" columns="1" layout="flex"
 						columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4"
@@ -21,25 +21,25 @@
 							<br></br>
 							<span class="ui-float-label" style=""> <p:inputText
 									id="username" value="#{registerCtrl.user.login}" required="true"
-									requiredMessage="Podaj Nazwę użytkownika!"
-									validatorMessage="Nazwa użytkownika nie może zawierać znaków specjalnych, a jego długośc musi mieścić się w zakresie 3-12">
+									requiredMessage="Enter your username!"
+									validatorMessage="User name cannot contain special characters and its length must be within 3-12">
 									<f:validateRegex
 										pattern="[a-zA-Z][a-zA-Z0-9-_]{3,12}" />
 								</p:inputText> <p:outputLabel
 									style="text-align: center;" for="username"
-									value="Nazwa użytkownika" />
+									value="Username" />
 							</span>
 							<p:message for="username" />
 							<br></br>
 							<br></br>
 							<span class="ui-float-label" style=""> <p:password 
 									id="password" value="#{registerCtrl.user.password}" required="true"
-									requiredMessage="Podaj hasło!"
-									validatorMessage="Hasło musi być posiadać cyfrę, duże, małe litery i zawierać conajmniej 8 znaków">
+									requiredMessage="Enter your password!"
+									validatorMessage="Password must be numeric, uppercase and lowercase and contain at least 8 characters">
 									<f:validateRegex
 										pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" />
 								</p:password> <p:outputLabel style="text-align: center;" for="password"
-									value="Hasło" />
+									value="Password" />
 
 							</span>
 							<p:message for="password" />
@@ -47,80 +47,79 @@
 							<br></br>
 							<span class="ui-float-label"> <p:password id="confPass"
 									value="#{registerCtrl.confPass}" /> <p:outputLabel
-									for="confPass" value="Powtórz hasło" />
+									for="confPass" value="Repeat your password" />
 							</span>
 							<p:message for="confPass" />
 							<br></br>
 							<br></br>
-							<span style="text-align: left; font-size: 20px;">Dane do
-								wysyłki:</span>
+							<span style="text-align: left; font-size: 20px;">Details for shipping:</span>
 							<span class="ui-float-label" style=""> <p:inputText
 									id="name" value="#{registerCtrl.user.name}" required="true"
-									requiredMessage="Podaj imię!"
-									validatorMessage="Imię nie powinno zawierać znaków specjalnych i cyfr">
+									requiredMessage="Enter name!"
+									validatorMessage="First name should not contain special characters and numbers">
 									<f:validateRegex pattern="^([ \u00c0-\u01ffa-zA-Z'\-])+$" />
 								</p:inputText> <p:outputLabel style="text-align: center;" for="name"
-									value="Imię" />
+									value="Name" />
 							</span>
 							<p:message for="name" />
 							<br></br>
 							<br></br>
 							<span class="ui-float-label"> <p:inputText id="surname"
 									value="#{registerCtrl.user.surname}" required="true"
-									requiredMessage="Podaj nazwisko!"
-									validatorMessage="Nazwisko nie powinno zawierać znaków specjalnych i cyfr">
+									requiredMessage="Enter surname!"
+									validatorMessage="Last name should not contain special characters and numbers">
 									<f:validateRegex pattern="^([ \u00c0-\u01ffa-zA-Z'\-])+$" />
-								</p:inputText> <p:outputLabel for="surname" value="Nazwisko" />
+								</p:inputText> <p:outputLabel for="surname" value="Surname" />
 							</span>
 							<p:message for="surname" />
 							<br></br>
 							<br></br>
 							<span class="ui-float-label"> <p:inputText id="city"
 									value="#{registerCtrl.user.city}" required="true"
-									requiredMessage="Podaj miasto!"
-									validatorMessage="Miasto:Niepoprawne dane! Podaj poprawne dane.">
+									requiredMessage="Enter city!"
+									validatorMessage="City:Invalid data! Please enter the correct data.">
 									<f:validateLength minimum="3" maximum="20" />
-								</p:inputText> <p:outputLabel for="city" value="Miasto" />
+								</p:inputText> <p:outputLabel for="city" value="City" />
 							</span>
 							<p:message for="city" />
 							<br></br>
 							<br></br>
 							<span class="ui-float-label"> <p:inputText id="street"
 									value="#{registerCtrl.user.street}" required="true"
-									requiredMessage="Podaj ulicę!"
-									validatorMessage="Ulica:Niepoprawne dane! Podaj poprawne dane.">
+									requiredMessage="Enter street!"
+									validatorMessage="Street:Incorrect data! Please enter correct data.">
 									<f:validateLength minimum="3" maximum="20" />
-								</p:inputText> <p:outputLabel for="street" value="Ulica" />
+								</p:inputText> <p:outputLabel for="street" value="Street" />
 							</span>
 							<p:message for="street" />
 							<br></br>
 							<br></br>
 							<span class="ui-float-label"> <p:inputText
 									id="houseNumber" value="#{registerCtrl.user.housenumber}"
-									required="true" requiredMessage="Podaj numer domu!"
-									validatorMessage="Numer domu:Niepoprawne dane! Podaj poprawne dane.">
+									required="true" requiredMessage="Enter house number!"
+									validatorMessage="House number:Invalid data! Please enter correct data.">
 									<f:validateLength minimum="1" maximum="20" />
-								</p:inputText> <p:outputLabel for="houseNumber" value="Numer domu" />
+								</p:inputText> <p:outputLabel for="houseNumber" value="House number" />
 							</span>
 							<p:message for="houseNumber" />
 							<br></br>
 							<br></br>
 							<span class="ui-float-label"> <p:inputText id="zipCode"
 									value="#{registerCtrl.user.zipcode}" required="true"
-									requiredMessage="Podaj kod pocztowy!"
-									validatorMessage="Kod pocztowy:Niepoprawne dane! Podaj poprawne dane.">
+									requiredMessage="Enter zip code"
+									validatorMessage="Zip Code:Invalid data! Please enter correct data.">
 									<f:validateLength minimum="3" maximum="20" />
-								</p:inputText> <p:outputLabel for="zipCode" value="Kod pocztowy" />
+								</p:inputText> <p:outputLabel for="zipCode" value="Zip code" />
 							</span>
 							<p:message for="zipCode" />
 							<br></br>
 							<br></br>
 							<span class="ui-float-label"> <p:inputText id="number"
 									value="#{registerCtrl.user.phoneNumber}" /> <p:outputLabel for="number"
-									value="Numer telefonu" />
+									value="Phone number" />
 							</span>
 							<br></br><br></br>
-							<p:commandButton value="Zarejestruj" id="ajax" update="grid"
+							<p:commandButton value="Register" id="ajax" update="grid"
 								action="#{registerCtrl.register_AJAX()}" style="margin-right:20px;"
 								styleClass="ui-priority-primary" />
 						</h:form>

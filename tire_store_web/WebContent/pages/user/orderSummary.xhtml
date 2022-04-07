@@ -17,44 +17,44 @@
 
 <ui:composition template="/templates/offerlist-template.xhtml">
 	<ui:define name="topic-name">
-		<span style="color: white;">Podsumowanie</span>
+		<span style="color: white;">Summary</span>
 	</ui:define>
 	<ui:define name="insertContent">
 
 		<div class="col-sm-6 offerView" style="text-align: justify; font-size: 20px; border-radius: 10px 0px 10px 10px;">
 
 			<table class="table table-dark">
-				<header style=" font-size: 30px;">Adres do wysyłki:</header>
+				<header style=" font-size: 30px;">Shipping Address:</header>
 				<tbody>
 					<tr>
-						<td>Imie:</td>
+						<td>Name:</td>
 						<td>#{orderCtrl.user.name}</td>
 
 					</tr>
 					<tr>
-						<td>Nazwisko:</td>
+						<td>Surname:</td>
 						<td>#{orderCtrl.user.surname}</td>
 					</tr>
 					<tr>
-						<td>Miasto:</td>
+						<td>City:</td>
 						<td>#{orderCtrl.user.city}</td>
 
 					</tr>
 					<tr>
-						<td>Ulica</td>
+						<td>Street</td>
 						<td>#{orderCtrl.user.street}</td>
 					</tr>
 					<tr>
-						<td>Numer domu:</td>
+						<td>Phone number:</td>
 						<td>#{orderCtrl.user.housenumber}</td>
 					</tr>
 					<hr></hr>
 						<tr>
-							<td>Kod pocztowy:</td>
+							<td>Zip-code:</td>
 							<td>#{orderCtrl.user.zipcode}</td>
 						</tr>
 						<tr>
-							<td>Numer telefonu:</td>
+							<td>Phone number:</td>
 							<td>#{orderCtrl.user.phoneNumber}</td>
 						</tr>
 				</tbody>
@@ -62,7 +62,7 @@
 			<div class="text-right"
 				style="clear: both; margin-top: 12px; margin-right: 10px;">
 				<p>
-					Adres możesz zmienić w zakładce konto
+					You can change your address in the account tab
 				</p>
 			</div>
 			<hr></hr>
@@ -76,26 +76,26 @@
 					width='100px'></img></header>
 				<tbody>
 					<tr>
-						<td>Firma:</td>
-						<td>#{orderCtrl.offer.getTireproduct().brand}</td>
+						<td>Company:</td>
+						<td>#{orderCtrl.tireproduct.brand}</td>
 
 					</tr>
 					<tr>
 						<td>Model:</td>
-						<td>#{orderCtrl.offer.getTireproduct().model}</td>
+						<td>#{orderCtrl.tireproduct.model}</td>
 					</tr>
 					<tr>
-						<td>Rozmiar:</td>
-						<td>#{orderCtrl.offer.getTireproduct().size}</td>
+						<td>Size:</td>
+						<td>#{orderCtrl.tireproduct.size}</td>
 
 					</tr>
 					<tr>
-						<td><span style='color: red;'> szt.</span></td>
+						<td><span style='color: red;'>pcs.</span></td>
 						<td>#{orderCtrl.quantity}</td>
 					</tr>
 					<tr>
-						<td>cena za sztukę:</td>
-						<td>#{orderCtrl.offer.price}</td>
+						<td>price per piece:</td>
+						<td>#{orderCtrl.tireproduct.price}</td>
 					</tr>
 					<hr></hr>
 				</tbody>
@@ -103,10 +103,10 @@
 			<div style="margin-top: 50px; clear: both">
 					<div style="float: right;">
 						<span
-							style="margin-right: 10px; font-size: 20px; color: #ff3333; font-weight: 800">Razem:
+							style="margin-right: 10px; font-size: 20px; color: #ff3333; font-weight: 800">For all:
 							#{orderCtrl.totalPrice}zł</span>
 							<h:form>
-						<p:commandButton value="Kup" id="ajax" ajax="false"
+						<p:commandButton value="Buy" id="ajax" ajax="false"
 								action="#{orderCtrl.buyProduct()}" style="margin-right:20px;"
 								styleClass="ui-priority-primary" />
 								</h:form>

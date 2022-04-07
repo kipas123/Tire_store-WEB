@@ -11,17 +11,17 @@
 
 <ui:composition template="/templates/login-template.xhtml">
 	<ui:define name="topic-name">
-		<span style="color: white;">Logowanie</span>
+		<span style="color: white;">Log in</span>
 	</ui:define>
 	<ui:define name="insertContent">
 		<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 			<div class="panel panel-default">
 				<div class="panel-body text-center">
-					<h3>Logowanie</h3>
+					<h3>Log in</h3>
 					<p>
-						Jeżeli nie masz konta
+						If you do not have an account
 						<p:link outcome="#{registerCtrl.registerPage()}"
-							value="Zarejestruj się">
+							value="Sign up">
 						</p:link>
 					</p>
 					<p:panelGrid id="grid" columns="1" layout="flex"
@@ -31,24 +31,24 @@
 							<br></br>
 							<span class="ui-float-label" style=""> <p:inputText
 									id="username" value="#{loginCtrl.user.login}" required="true"
-									requiredMessage="Podaj Nazwę użytkownika!">
+									requiredMessage="Enter your username!">
 								</p:inputText> <p:outputLabel style="text-align: center;" for="username"
-									value="Nazwa użytkownika" />
+									value="Username" />
 							</span>
 							<p:message for="username" />
 							<br></br>
 							<br></br>
 							<span class="ui-float-label" style=""> <p:password
 									id="password" value="#{loginCtrl.user.password}"
-									required="true" requiredMessage="Podaj hasło!">
+									required="true" requiredMessage="Enter your password!">
 								</p:password> <p:outputLabel style="text-align: center;" for="password"
-									value="Hasło" />
+									value="Password" />
 
 							</span>
 							<p:message for="password" />
 							<br></br>
 							<br></br>
-							<p:commandButton value="Zaloguj" id="ajax" update="grid"
+							<p:commandButton value="Log in" id="ajax" update="grid"
 								action="#{loginCtrl.login()}" style="margin-right:20px;"
 								styleClass="ui-priority-primary" />
 						</h:form>

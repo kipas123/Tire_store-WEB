@@ -12,46 +12,63 @@
 
 <ui:composition template="/templates/offerlist-template.xhtml">
 	<ui:define name="topic-name">
-		<span style="color: white;">Wszystkie zamówienia</span>
+		<span style="color: white;">All orders</span>
 	</ui:define>
 	<ui:define name="insertContent">
 		<div class="card" style="margin-bottom: 200px;">
-<h:form id="form">
-    <div class="card crud-demo">
-        <p:growl id="msg" showDetail="true"/>
+				<div class="card crud-demo">
+					<p:growl id="msg" showDetail="true" />
+					<div style="float: left;">
+						<h:form id="bb">
+							<span class="ui-float-label" style=""> <p:inputText
+									id="searchx" value="#{orderBean.search}" required="true"
+									requiredMessage="Podaj id zamówienia!"
+									validatorMessage="Nazwa użytkownika nie może zawierać znaków specjalnych, a jego długośc musi mieścić się w zakresie 3-12">
+								</p:inputText> <p:outputLabel style="text-align: center;" for="searchx"
+									value="Idorder/login" />
+							</span>
+
+							<p:commandButton value="Search for a user" ajax="false"
+								style="margin-right:20px; float:left;" update="aa msg" />
+						</h:form>
+					</div>
+					<div style="clear: both;"></div>
+					<h:form id="aa">
+						<p:dataTable id="dt-products" widgetVar="dtProducts" var="order"
+							value="#{orderBean.model}" reflow="true"
+							styleClass="products-table" rowKey="#{order.idorder}" rows="5"
+							paginator="true"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+							rowsPerPageTemplate="5,10,{ShowAll|'All'}" lazy="true">
 
 
-        <p:dataTable id="dt-products" widgetVar="dtProducts" var="order" value="#{orderCtrl.getOrders()}"
-                     reflow="true" styleClass="products-table"
-                     rowKey="#{order.idorder}" rows="10" paginator="true"
-					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-					currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
-					rowsPerPageTemplate="5,10,{ShowAll|'All'}">
-
-
-            <p:column headerText="ID_zam" filterBy="#{order.idorder}">
-                <h:outputText value="#{order.idorder}"/>
-            </p:column>
-            <p:column headerText="Użytkownik" filterBy="#{order.user.login}">
-                <h:outputText value="#{order.user.login}"/>
-            </p:column>
-            <p:column headerText="Data" sortBy="#{order.orderdata}">
-                <h:outputText value="#{order.orderdata}"/>
-            </p:column>
-            <p:column headerText="Status zamówienia" sortBy="#{order.orderstatus.name}">
-                <h:outputText value="#{order.orderstatus.name}"/>
-            </p:column>
-            <p:column headerText="Narzędzia">
-            <p:commandButton value="Edytuj zamówienie" id="views" ajax="false"
-								action="#{orderCtrl.orderModify(order)}" style="float:left;"/><br>/</br>
-               <p:commandButton value="Zobacz zamówienie" id="view" ajax="false"
-								action="#{orderCtrl.orderShow(order)}" style="float:left;" ></p:commandButton>
-            </p:column>
-           </p:dataTable>
-    </div>
-</h:form>
-
-    </div>
+							<p:column headerText="ID_order" filterBy="#{order.idorder}">
+								<h:outputText value="#{order.idorder}" />
+							</p:column>
+							<p:column headerText="Name" filterBy="#{order.user.login}">
+								<h:outputText value="#{order.user.login}" />
+							</p:column>
+							<p:column headerText="Date" sortBy="#{order.orderdata}">
+								<h:outputText value="#{order.orderdata}" />
+							</p:column>
+							<p:column headerText="Order status"
+								sortBy="#{order.orderstatus.name}">
+								<h:outputText value="#{order.orderstatus.name}" />
+							</p:column>
+							<p:column headerText="Tools">
+								<p:commandButton value="Edit order" id="views"
+									ajax="false" action="#{orderCtrl.orderModify(order)}"
+									style="float:left;" />
+								<br>/</br>
+								<p:commandButton value="View order" id="view"
+									ajax="false" action="#{orderCtrl.orderShow(order)}"
+									style="float:left;"></p:commandButton>
+							</p:column>
+						</p:dataTable>
+					</h:form>
+				</div>
+		</div>
 
 
 	</ui:define>

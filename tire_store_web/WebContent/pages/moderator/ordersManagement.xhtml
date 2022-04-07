@@ -12,63 +12,68 @@
 
 <ui:composition template="/templates/offerlist-template.xhtml">
 	<ui:define name="topic-name">
-		<span style="color: white;">Zamówienia do realizacji</span>
+		<span style="color: white;">Orders to be processed</span>
 	</ui:define>
 	<ui:define name="insertContent">
-		<div class="card" style="margin-bottom: 200px;">
-<h:form id="form">
     <div class="card crud-demo">
-        <p:growl id="messages" showDetail="true"/>
-
-
-        <p:dataTable id="dt-products" widgetVar="dtProducts" var="order" value="#{orderCtrl.getOrdersToHandle()}"
+    <h:form>
+        <p:growl id="msg" showDetail="true"/>
+        </h:form>
+    <div style="float:left;">
+      <h:form id="bb">	
+				<span class="ui-float-label" style=""> <p:inputText 
+						id="searchx" value="#{orderToHandleBean.search}" required="true"
+						requiredMessage="Podaj id zamówienia!" validatorMessage="Nazwa użytkownika nie może zawierać znaków specjalnych, a jego długośc musi mieścić się w zakresie 3-12">
+					</p:inputText> <p:outputLabel style="text-align: center;" for="searchx"
+						value="Idorder/login" />
+				</span>
+				
+				<p:commandButton value="Search for a user" ajax="false"
+								 style="margin-right:20px; float:left;" update="tests msg"/>
+				</h:form>
+				</div>
+								 <div style="clear:both;"></div>
+								  <h:form id="tests">
+        <p:dataTable id="dt-products" widgetVar="dtProducts" var="order" value="#{orderToHandleBean.model}"
                      reflow="true" styleClass="products-table"
-                     rowKey="#{order.idorder}" rows="10" paginator="true"
+                     rowKey="#{order.idorder}" rows="5" paginator="true"
 					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
-					rowsPerPageTemplate="5,10,{ShowAll|'All'}">
+					rowsPerPageTemplate="5,10,{ShowAll|'All'}" lazy="true">
 
 
-            <p:column headerText="ID_zam" filterBy="#{order.idorder}">
+            <p:column headerText="ID_order" filterBy="#{order.idorder}">
                 <h:outputText value="#{order.idorder}"/>
             </p:column>
-            <p:column headerText="Użytkownik" filterBy="#{order.user.login}">
+            <p:column headerText="Username" filterBy="#{order.user.login}">
                 <h:outputText value="#{order.user.login}"/>
             </p:column>
-            <p:column headerText="Data" sortBy="#{order.orderdata}">
+            <p:column headerText="Date" sortBy="#{order.orderdata}">
                 <h:outputText value="#{order.orderdata}"/>
             </p:column>
-            <p:column headerText="Status zamówienia" sortBy="#{order.orderstatus.name}">
+            <p:column headerText="Order status" sortBy="#{order.orderstatus.name}">
                 <h:outputText value="#{order.orderstatus.name}"/>
             </p:column>
-            <p:column headerText="Kontroler statusu zamówienia">
-            <h:form id="selector">
+            <p:column headerText="Order Status Controller">
                 <h:selectOneMenu id="selector" value="#{orderCtrl.selected}">
-                    <f:selectItem itemLabel="Wybierz status" itemValue="" noSelectionOption="true"/>
+                    <f:selectItem itemLabel="Choose status" itemValue="" noSelectionOption="false"/>
                     <c:forEach items="#{orderCtrl.getOrderStatuses()}" var="status">
              <f:selectItem itemValue="#{status.idorderstatus}" itemLabel = "#{status.name}" /> 
              </c:forEach>
                 </h:selectOneMenu>
-				<p:commandButton value="Zmień status" id="ajax" ajax="false"
+				<p:commandButton value="Change status" ajax="false"
 								action="#{orderCtrl.changeOrderStatus(order)}" style="margin-right:20px;"
-								styleClass="ui-priority-primary" />
-								</h:form>
+								styleClass="ui-priority-primary" />			
             </p:column>
-            <p:column headerText="Narzędzia">
-            <p:commandButton value="Edytuj zamówienie" id="views" ajax="false"
-								action="#{orderCtrl.changeOrderStatus(order)}" style="float:left;"/><br>/</br>
-               <p:commandButton value="Zobacz zamówienie" id="view" ajax="false"
-								action="#{orderCtrl.changeOrderStatus(order)}" style="float:left;" ></p:commandButton>
+            <p:column headerText="Tools">
+            <p:commandButton value="Edit order" id="views" ajax="false"
+								action="#{orderCtrl.orderModify(order)}" style="float:left;"/><br>/</br>
+               <p:commandButton value="View order" id="view" ajax="false" target="_blank"
+								action="#{orderCtrl.orderShow(order)}" style="float:left;" ></p:commandButton>
             </p:column>
            </p:dataTable>
+           	</h:form>
     </div>
-</h:form>
-
-    </div>
-			<h:form>
-			<p:messages id="msg" />
-			</h:form>
-
 
 	</ui:define>
 </ui:composition>

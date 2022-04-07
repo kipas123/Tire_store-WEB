@@ -11,43 +11,43 @@
 
 <ui:composition template="/templates/offerlist-template.xhtml">
 	<ui:define name="topic-name">
-		<span style="color: white;">Opony osobowe</span>
+		<span style="color: white;">Tire for cars</span>
 	</ui:define>
 	<ui:define name="insertContent">
 		<div class="card" style="margin-bottom: 200px;">
 			<h:form>
-				<p:dataTable var="order" value="#{accountOrders.getUserOrders()}"
-					rows="10" paginator="true"
+				<p:dataTable var="order" value="#{orderUserBean.model}"
+					rows="5" paginator="true"
 					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
-					rowsPerPageTemplate="5,10,{ShowAll|'All'}">
+					rowsPerPageTemplate="5,10,{ShowAll|'All'}" lazy="true">
 
-					<p:column headerText="ID_zam">
+					<p:column headerText="ID_order">
 						<h:outputText value="#{order.idorder}" />
 					</p:column>
-					<p:column headerText="Nr.Produktów">
+					<p:column headerText="Product No.">
 						<ui:repeat var="products"
 							value="#{accountOrders.getUserOrdersProducts(order)}">
 							<h:outputText value="#{products.tireproduct.idtire}" />
 						</ui:repeat>
 					</p:column>
-					<p:column headerText="Sztuki">
+					<p:column headerText="Pieces">
 						<ui:repeat var="products"
 							value="#{accountOrders.getUserOrdersProducts(order)}">
 							<h:outputText value="#{products.quantity}" />
 						</ui:repeat>
 					</p:column>
-					<p:column headerText="Do zapłaty">
+					<p:column headerText="To be paid">
 						<h:outputText value="#{order.totalprice}" /> zł
 					</p:column>
-					<p:column headerText="Data_zamówienia">
+					<p:column headerText="Order_date">
 						<h:outputText value="#{order.orderdata}" />
 					</p:column>
 					<p:column headerText="Status">
 						<h:outputText value="#{order.getOrderstatus().name}" />
 					</p:column>
-					<p:column headerText="Narzędzia">
-						<p:commandButton value="Zobacz zamówienie" id="view" ajax="false"
+					<p:column headerText="Tools">
+						<p:commandButton value="View order" id="view" ajax="false"
 								action="#{orderCtrl.orderShow(order)}" style="float:left;" ></p:commandButton>
 					</p:column>
 

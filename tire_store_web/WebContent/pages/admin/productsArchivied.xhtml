@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<!--<f:metadata>
+    <f:viewAction action="#{loginCtrl.isInrole()}" />
+</f:metadata> -->
+
+<ui:composition template="/templates/offerlist-template.xhtml">
+	<ui:define name="topic-name">
+		<span style="color: white;">Manage your products</span>
+	</ui:define>
+	<ui:define name="insertContent">
+		<div class="card" style="margin-bottom: 200px;">
+				<div class="card crud-demo">
+					<p:growl id="msg" showDetail="true" />
+<div style="float: left;">
+				<h:form id="bb">
+					<span class="ui-float-label" style=""> <p:inputText
+							id="searchx" value="#{tireproductArchiviedBean.search}" required="true"
+							requiredMessage="Podaj id zamówienia!"
+							validatorMessage="Nazwa użytkownika nie może zawierać znaków specjalnych, a jego długośc musi mieścić się w zakresie 3-12">
+						</p:inputText> <p:outputLabel style="text-align: center;" for="searchx"
+							value="Idorder/login" />
+					</span>
+
+					<p:commandButton value="Search for a user" ajax="false"
+						style="margin-right:20px; float:left;" update="form msg" />
+				</h:form>
+			</div>			
+						<div style="clear: both;"></div>
+				<h:form id="form">
+					<p:dataTable id="dt-products" widgetVar="dtProducts" var="product"
+						value="#{tireproductArchiviedBean.model}" reflow="true"
+						styleClass="products-table" rowKey="#{order.idorder}" rows="5"
+						paginator="true"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+						rowsPerPageTemplate="5,10,{ShowAll|'All'}" lazy="true">
+
+
+						<p:column headerText="ID_zam" filterBy="#{product.idtire}"
+							sortBy="#{product.idtire}">
+							<h:outputText value="#{product.idtire}" />
+						</p:column>
+						<p:column headerText="Rodzaj_produktu"
+							filterBy="#{product.tiretype.name}">
+							<h:outputText value="#{product.tiretype.name}" />
+						</p:column>
+						<p:column headerText="Company" filterBy="#{product.brand}">
+							<h:outputText value="#{product.brand}" />
+						</p:column>
+						<p:column headerText="Model" filterBy="#{product.model}">
+							<h:outputText value="#{product.model}" />
+						</p:column>
+						<p:column headerText="Size" filterBy="#{product.size}">
+							<h:outputText value="#{product.size}" />
+						</p:column>
+						<p:column headerText="Offer status" sortBy="#{product.hasOffer}">
+							<h:panelGroup class="dotCircle" rendered="#{productManagement.toBollean(product)}"></h:panelGroup>
+							<h:panelGroup class="dotCircleOff" rendered="#{!productManagement.toBollean(product)}"></h:panelGroup>
+						</p:column>
+						<p:column exportable="false" headerText="Tools">
+								 <p:commandButton value="!Restore!" action="#{adminCtrl.restore(product)}" update="form" styleClass="p-mr-2" icon="pi pi-check" style="margin-right:20px; background-color: red;">
+            <p:confirm header="Confirmation" message="Are you sure you want to restore the product??" icon="pi pi-exclamation-triangle"/>
+        </p:commandButton>
+            </p:column>
+					</p:dataTable>
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" />
+        </p:confirmDialog>
+								</h:form>
+				</div>
+
+		</div>
+
+
+	</ui:define>
+</ui:composition>
+</html>
